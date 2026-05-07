@@ -36,14 +36,19 @@
     "file_system": {
         "resources": [
             {
-                "name": "thlib-resources",
-                "type": "directory",
-                "path": "packages/thlib-resources/"
+            "name": "thlib",
+            "type": "directory",
+            "path": "packages/thlib/"
             },
             {
-                "name": "thlib-scripts",
-                "type": "directory",
-                "path": "packages/thlib-scripts/"
+            "name": "plugins",
+            "type": "directory",
+            "path": "plugins/"
+            },
+            {
+            "name": "mod",
+            "type": "directory",
+            "path": "mod/Test/"
             }
         ],
         "user": "userdata/"

@@ -1,20 +1,17 @@
 [
-    {
-        "enable": true,
-        "directory_mode": true,
-        "name": "ColliderShapeDebugger",
-        "path": "plugins\/ColliderShapeDebugger\/"
-    },
-    {
-        "enable": true,
-        "directory_mode": true,
-        "name": "PlayerExtensions",
-        "path": "plugins\/PlayerExtensions\/"
-    },
-    {
-        "enable": true,
-        "directory_mode": true,
-        "name": "StageBackgroundExtensions",
-        "path": "plugins\/StageBackgroundExtensions\/"
-    }
+  {
+    "id": "thlib.default.bullet",
+    "enabled": true,
+    "path": "plugins/thlib.default.bullet/"
+  },
+  {
+    "id": "thlib.default.se",
+    "enabled": true,
+    "path": "plugins/thlib.default.se/"
+  },
+  {
+    "id": "thlib.default.ui",
+    "enabled": true,
+    "path": "plugins/thlib.default.ui/"
+  }
 ]
