@@ -9,6 +9,10 @@ function Chip:init(master, visual)
     self.visual = visual
 
     self.img = "img_void"
+
+    -- local: 相对 master
+    -- world: 世界坐标
+    -- ui: 之后扩展 UI 坐标
     self.space = "local"
 
     self.x = 0
@@ -23,6 +27,8 @@ function Chip:init(master, visual)
     self.r = 255
     self.g = 255
     self.b = 255
+
+    self.z = 0.5
 
     self.visible = true
     self.timer = 0
@@ -43,6 +49,7 @@ function Chip:render()
 
     if self.space ~= "world" then
         local master = self.master
+
         if master then
             draw_x = master.x + draw_x
             draw_y = master.y + draw_y
@@ -65,9 +72,6 @@ function Chip:render()
     )
 end
 
-function Chip:del()
-end
-
 function Chip:isValid()
     return self.__alive == true
 end
@@ -78,9 +82,13 @@ function Chip:delete()
     end
 
     self.__alive = false
+
     if self.del then
         self:del()
     end
+end
+
+function Chip:del()
 end
 
 return Chip
