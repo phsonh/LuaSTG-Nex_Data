@@ -66,7 +66,7 @@
         "width": 1280,
         "height": 960,
         "fullscreen": false,
-        "vsync": false
+        "vsync": true
     },
     "audio_system": {
         "preferred_endpoint_name": "",

@@ -1,18 +1,18 @@
-[2026-05-08 18:57:14] [I] Duration before logging system: 0.0188092s
-[2026-05-08 18:57:14] [I] LuaSTG Nexus v0.1.2
-[2026-05-08 18:57:14] [I] [luastg] 初始化引擎
-[2026-05-08 18:57:14] [I] [luastg] 初始化对象池，容量32768
-[2026-05-08 18:57:14] [I] [luastg] 初始化luajit引擎
-[2026-05-08 18:57:14] [I] [luajit] LuaJIT 2.1.1778074285
-[2026-05-08 18:57:14] [I] [luajit] 注册标准库与内置包
-[2026-05-08 18:57:14] [I] [luajit] [0] E:\STG\LuaSTG-Future\LuaSTG-Data\LuaSTG-Nex_Data\LuaSTGSub.exe
-[2026-05-08 18:57:14] [I] [luastg] load configuration from script 'launch'
-[2026-05-08 18:57:14] [I] [core] System: Windows 11 25H2
-[2026-05-08 18:57:14] [I] [core] Kernel: NT OS Kernel 10.0.26100.8246 Kernel32 10.0.26100.8246
-[2026-05-08 18:57:14] [I] [core] CPU: 11th Gen Intel(R) Core(TM) i5-1155G7 @ 2.50GHz
-[2026-05-08 18:57:14] [I] [core] [GraphicsDevice] initializing...
-[2026-05-08 18:57:14] [I] [core] [GraphicsDevice] enumerate physical devices
-[2026-05-08 18:57:14] [I] [core] [GraphicsDeviceManager] Graphics System details:
+[2026-05-08 23:22:18] [I] Duration before logging system: 0.0186532s
+[2026-05-08 23:22:18] [I] LuaSTG Nexus v0.1.2
+[2026-05-08 23:22:18] [I] [luastg] 初始化引擎
+[2026-05-08 23:22:18] [I] [luastg] 初始化对象池，容量32768
+[2026-05-08 23:22:18] [I] [luastg] 初始化luajit引擎
+[2026-05-08 23:22:18] [I] [luajit] LuaJIT 2.1.1778074285
+[2026-05-08 23:22:18] [I] [luajit] 注册标准库与内置包
+[2026-05-08 23:22:18] [I] [luajit] [0] E:\STG\LuaSTG-Future\LuaSTG-Data\LuaSTG-Nex_Data\LuaSTGSub.exe
+[2026-05-08 23:22:18] [I] [luastg] load configuration from script 'launch'
+[2026-05-08 23:22:18] [I] [core] System: Windows 11 25H2
+[2026-05-08 23:22:18] [I] [core] Kernel: NT OS Kernel 10.0.26100.8246 Kernel32 10.0.26100.8246
+[2026-05-08 23:22:18] [I] [core] CPU: 11th Gen Intel(R) Core(TM) i5-1155G7 @ 2.50GHz
+[2026-05-08 23:22:18] [I] [core] [GraphicsDevice] initializing...
+[2026-05-08 23:22:18] [I] [core] [GraphicsDevice] enumerate physical devices
+[2026-05-08 23:22:18] [I] [core] [GraphicsDeviceManager] Graphics System details:
     Features:
         Present allow tearing (Windows DXGI): supported
     Physical devices:
@@ -43,8 +43,8 @@
             Flags: SOFTWARE ACG_COMPATIBLE SUPPORT_MONITORED_FENCES KEYED_MUTEX_CONFORMANCE
             Graphics preemption granularity: INSTRUCTION_BOUNDARY
             Compute preemption granularity: INSTRUCTION_BOUNDARY
-[2026-05-08 18:57:14] [I] [core] [GraphicsDevice] current physical device: Intel(R) Iris(R) Xe Graphics
-[2026-05-08 18:57:14] [I] [core] [GraphicsDevice] device feature support details:
+[2026-05-08 23:22:18] [I] [core] [GraphicsDevice] current physical device: Intel(R) Iris(R) Xe Graphics
+[2026-05-08 23:22:18] [I] [core] [GraphicsDevice] device feature support details:
     Direct3D feature level: 12.1
     Threading:
         Driver concurrent creates: supported
@@ -114,7 +114,7 @@
     Displayable:
         Displayable texture: not supported
         Shared resource tier: 3
-[2026-05-08 18:57:14] [I] [core] [GraphicsDevice] device format support details:
+[2026-05-08 23:22:18] [I] [core] [GraphicsDevice] device format support details:
     R32G32B32A32_TYPELESS: TEXTURE1D TEXTURE2D TEXTURE3D TEXTURECUBE MIP CPU_LOCKABLE CAST_WITHIN_BIT_LAYOUT TILED SHAREABLE
     R32G32B32A32_FLOAT: BUFFER IA_VERTEX_BUFFER SO_BUFFER TEXTURE1D TEXTURE2D TEXTURE3D TEXTURECUBE SHADER_LOAD SHADER_SAMPLE MIP MIP_AUTOGEN RENDER_TARGET BLENDABLE CPU_LOCKABLE MULTISAMPLE_RESOLVE CAST_WITHIN_BIT_LAYOUT MULTISAMPLE_RENDERTARGET MULTISAMPLE_LOAD SHADER_GATHER TYPED_UNORDERED_ACCESS_VIEW UAV_TYPED_LOAD UAV_TYPED_STORE TILED SHAREABLE
     R32G32B32A32_UINT: BUFFER IA_VERTEX_BUFFER SO_BUFFER TEXTURE1D TEXTURE2D TEXTURE3D TEXTURECUBE SHADER_LOAD MIP RENDER_TARGET CPU_LOCKABLE CAST_WITHIN_BIT_LAYOUT MULTISAMPLE_RENDERTARGET MULTISAMPLE_LOAD TYPED_UNORDERED_ACCESS_VIEW UAV_TYPED_LOAD UAV_TYPED_STORE OUTPUT_MERGER_LOGIC_OP TILED SHAREABLE
@@ -236,12 +236,12 @@
     SAMPLER_FEEDBACK_MIN_MIP_OPAQUE:
     SAMPLER_FEEDBACK_MIP_REGION_USED_OPAQUE:
     A4B4G4R4_UNORM:
-[2026-05-08 18:57:14] [I] [core] [GraphicsDevice] initialization complete
-[2026-05-08 18:57:14] [I] [core] Graphics Device: Intel(R) Iris(R) Xe Graphics
+[2026-05-08 23:22:18] [I] [core] [GraphicsDevice] initialization complete
+[2026-05-08 23:22:18] [I] [core] Graphics Device: Intel(R) Iris(R) Xe Graphics
     Direct Flip Support: true
     Independent Flip Support: true
     Present Allow Tearing: true
-[2026-05-08 18:57:14] [I] [core] Display Output: Intel(R) Iris(R) Xe Graphics -> \\.\DISPLAY1
+[2026-05-08 23:22:18] [I] [core] Display Output: Intel(R) Iris(R) Xe Graphics -> \\.\DISPLAY1
     Overlays Support: true
     Multi Plane Overlay:
         Support: true
@@ -267,17 +267,17 @@
         Fullscreen: true
         Windowed: true
         Cursor Stretched: false
-[2026-05-08 18:57:14] [I] [core] [SwapChain] creating...
-[2026-05-08 18:57:14] [I] [core] [SwapChain] created:
+[2026-05-08 23:22:18] [I] [core] [SwapChain] creating...
+[2026-05-08 23:22:18] [I] [core] [SwapChain] created:
     Display Mode: 640x480
     Buffer Count: 3
     Swap Effect: FLIP_DISCARD
     Present Allow Tearing: true
     Frame Latency Waitable Object: true
-[2026-05-08 18:57:14] [I] [core] [Renderer] initializing...
-[2026-05-08 18:57:14] [I] [core] [Renderer] initialization complete
-[2026-05-08 18:57:15] [I] [luastg] 成功创建了 0 个控制器
-[2026-05-08 18:57:15] [I] [core] Display Output: Intel(R) Iris(R) Xe Graphics -> \\.\DISPLAY1
+[2026-05-08 23:22:18] [I] [core] [Renderer] initializing...
+[2026-05-08 23:22:18] [I] [core] [Renderer] initialization complete
+[2026-05-08 23:22:18] [I] [luastg] 成功创建了 0 个控制器
+[2026-05-08 23:22:18] [I] [core] Display Output: Intel(R) Iris(R) Xe Graphics -> \\.\DISPLAY1
     Overlays Support: true
     Multi Plane Overlay:
         Support: true
@@ -303,61 +303,47 @@
         Fullscreen: true
         Windowed: true
         Cursor Stretched: false
-[2026-05-08 18:57:15] [I] [core] [SwapChain] creating...
-[2026-05-08 18:57:15] [I] [core] [SwapChain] created:
+[2026-05-08 23:22:18] [I] [core] [SwapChain] creating...
+[2026-05-08 23:22:18] [I] [core] [SwapChain] created:
     Display Mode: 640x480
     Buffer Count: 3
     Swap Effect: FLIP_DISCARD
     Present Allow Tearing: true
     Frame Latency Waitable Object: true
-[2026-05-08 18:57:15] [I] [luastg] loading main script
-[2026-05-08 18:57:15] [I] [luastg] main script 'core.lua' loaded
-[2026-05-08 18:57:15] [I] [luastg] 初始化完成
-[2026-05-08 18:57:15] [I] [lua] [thlib.runtime] init
-[2026-05-08 18:57:15] [I] [luastg] 加载脚本'root.lua'
-[2026-05-08 18:57:15] [I] [lua] [mod/Test] root.lua loaded
-[2026-05-08 18:57:15] [I] [luastg] 加载脚本'script.lua'
-[2026-05-08 18:57:15] [I] [lua] [lstg api] Sprite = table: 0x01f098180ba0
-[2026-05-08 18:57:15] [I] [lua] [lstg api] Texture2D = table: 0x01f098174cc0
-[2026-05-08 18:57:15] [I] [lua] [lstg api] SpriteRenderer = table: 0x01f098181200
-[2026-05-08 18:57:15] [I] [lua] [lstg api] SpriteRectRenderer = table: 0x01f098181830
-[2026-05-08 18:57:15] [I] [lua] [lstg api] SpriteQuadRenderer = table: 0x01f098181c88
-[2026-05-08 18:57:15] [I] [lua] [lstg api] LoadMusic = function: 0x01f098168440
-[2026-05-08 18:57:15] [I] [lua] [lstg api] LoadFont = function: 0x01f0981684a8
-[2026-05-08 18:57:15] [I] [lua] [lstg api] LoadTTF = function: 0x01f098168510
-[2026-05-08 18:57:15] [I] [lua] [lstg api] LoadTrueTypeFont = function: 0x01f098168570
-[2026-05-08 18:57:15] [I] [lua] [lstg api] LoadFX = function: 0x01f0981685e0
-[2026-05-08 18:57:15] [I] [lua] [lstg api] LoadModel = function: 0x01f098168640
-[2026-05-08 18:57:15] [I] [lua] [lstg api] SetTexturePreMulAlphaState = function: 0x01f098168780
-[2026-05-08 18:57:15] [I] [lua] [lstg api] SetTextureSamplerState = function: 0x01f0981687f8
-[2026-05-08 18:57:15] [I] [lua] [lstg api] GetTextureSize = function: 0x01f098168868
-[2026-05-08 18:57:15] [I] [lua] [lstg api] SetImageScale = function: 0x01f098168a00
-[2026-05-08 18:57:15] [I] [lua] [lstg api] GetImageScale = function: 0x01f098168a68
-[2026-05-08 18:57:15] [I] [lua] [lstg api] GetImageSize = function: 0x01f098168ad0
-[2026-05-08 18:57:15] [I] [lua] [lstg api] SetImageState = function: 0x01f098168b38
-[2026-05-08 18:57:15] [I] [lua] [lstg api] GetImageBlend = function: 0x01f098168ba0
-[2026-05-08 18:57:15] [I] [lua] [lstg api] GetImageColor = function: 0x01f098168c08
-[2026-05-08 18:57:15] [I] [lua] [lstg api] SetImageCenter = function: 0x01f098168c70
-[2026-05-08 18:57:15] [I] [lua] [lstg api] LoadPack = function: 0x01f09816bff8
-[2026-05-08 18:57:15] [I] [lua] [lstg api] LoadPackSub = function: 0x01f09816c208
-[2026-05-08 18:57:15] [I] [lua] [lstg api] SaveTexture = function: 0x01f098165f28
-[2026-05-08 18:57:15] [I] [lua] [lstg api] RenderTexture = function: 0x01f0981664b0
-[2026-05-08 18:57:15] [I] [lua] [lstg api] SetResLoadInfo = function: 0x01f098162508
-[2026-05-08 18:57:15] [I] [lua] [lstg api] LoadTexture = function: 0x01f098162650
-[2026-05-08 18:57:15] [I] [lua] [lstg api] LoadImage = function: 0x01f098168240
-[2026-05-08 18:57:15] [I] [lua] [lstg api] CopyImage = function: 0x01f0981682a8
-[2026-05-08 18:57:15] [I] [lua] [lstg api] LoadAnimation = function: 0x01f098168310
-[2026-05-08 18:57:15] [I] [lua] [lstg api] LoadPS = function: 0x01f098168378
-[2026-05-08 18:57:15] [I] [lua] [lstg api] LoadSound = function: 0x01f0981683d8
-[2026-05-08 18:57:15] [I] [lua] [lstg api] LoadTextFile = function: 0x01f098160cc0
-[2026-05-08 18:57:15] [I] Duration of initialization: 0.2849909s
-[2026-05-08 18:57:15] [I] [luastg] 开始更新&渲染循环
-[2026-05-08 18:57:24] [I] [luastg] 结束更新&渲染循环
-[2026-05-08 18:57:24] [I] [lua] [thlib.runtime] shutdown
-[2026-05-08 18:57:24] [I] [luastg] 清空对象池
-[2026-05-08 18:57:24] [I] [luastg] 关闭luajit引擎
-[2026-05-08 18:57:24] [I] [luastg] 已清空资源池 'global'
-[2026-05-08 18:57:24] [I] [luastg] 已清空资源池 'stage'
-[2026-05-08 18:57:24] [I] [luastg] 清空所有游戏资源
-[2026-05-08 18:57:24] [I] [luastg] 卸载所有资源包
-[2026-05-08 18:57:24] [I] [luastg] 引擎关闭
+[2026-05-08 23:22:18] [I] [luastg] loading main script
+[2026-05-08 23:22:18] [I] [luastg] main script 'core.lua' loaded
+[2026-05-08 23:22:18] [I] [luastg] 初始化完成
+[2026-05-08 23:22:18] [I] [lua] [thlib.runtime] init
+[2026-05-08 23:22:18] [I] [luastg] 加载脚本'root.lua'
+[2026-05-08 23:22:18] [I] [lua] [mod/Test] root.lua loaded
+[2026-05-08 23:22:18] [I] [luastg] 加载脚本'script.lua'
+[2026-05-08 23:22:18] [I] [luastg] LoadTexture: 已从 'ball_huge_blue.png' 加载纹理 'tex.ball' (global)
+[2026-05-08 23:22:18] [I] [luastg] CreateSprite: 已从纹理 'tex.ball' 创建图片精灵 'img.ball' (global)
+[2026-05-08 23:22:18] [I] [lua] [test_unit] created
+[2026-05-08 23:22:18] [I] Duration of initialization: 0.3011498s
+[2026-05-08 23:22:18] [I] [luastg] 开始更新&渲染循环
+[2026-05-08 23:22:19] [I] [lua] [test_chip] render img=img.ball x=-58.16 y=-98.74 rot=60.00
+[2026-05-08 23:22:20] [I] [lua] [test_chip] render img=img.ball x=-172.75 y=-97.74 rot=120.00
+[2026-05-08 23:22:21] [I] [lua] [test_chip] render img=img.ball x=-229.18 y=2.00 rot=180.00
+[2026-05-08 23:22:22] [I] [lua] [test_chip] render img=img.ball x=-171.02 y=100.74 rot=240.00
+[2026-05-08 23:22:23] [I] [lua] [test_chip] render img=img.ball x=-56.43 y=99.74 rot=300.00
+[2026-05-08 23:22:24] [I] [lua] [test_chip] render img=img.ball x=-0.00 y=0.00 rot=360.00
+[2026-05-08 23:22:25] [I] [lua] [test_chip] render img=img.ball x=-58.16 y=-98.74 rot=420.00
+[2026-05-08 23:22:26] [I] [lua] [test_chip] render img=img.ball x=-172.75 y=-97.74 rot=480.00
+[2026-05-08 23:22:27] [I] [lua] [test_chip] render img=img.ball x=-229.18 y=2.00 rot=540.00
+[2026-05-08 23:22:28] [I] [lua] [test_chip] render img=img.ball x=-171.02 y=100.74 rot=600.00
+[2026-05-08 23:22:29] [I] [lua] [test_chip] render img=img.ball x=-56.43 y=99.74 rot=660.00
+[2026-05-08 23:22:30] [I] [lua] [test_chip] render img=img.ball x=-0.00 y=0.00 rot=720.00
+[2026-05-08 23:22:31] [I] [lua] [test_chip] render img=img.ball x=-58.16 y=-98.74 rot=780.00
+[2026-05-08 23:22:32] [I] [lua] [test_chip] render img=img.ball x=-172.75 y=-97.74 rot=840.00
+[2026-05-08 23:22:33] [I] [lua] [test_chip] render img=img.ball x=-229.18 y=2.00 rot=900.00
+[2026-05-08 23:22:34] [I] [lua] [test_chip] render img=img.ball x=-171.02 y=100.74 rot=960.00
+[2026-05-08 23:22:35] [I] [luastg] 结束更新&渲染循环
+[2026-05-08 23:22:35] [I] [lua] [thlib.runtime] shutdown
+[2026-05-08 23:22:35] [I] [luastg] 清空对象池
+[2026-05-08 23:22:35] [I] [luastg] 关闭luajit引擎
+[2026-05-08 23:22:35] [I] [luastg] 已清空资源池 'global'
+[2026-05-08 23:22:35] [I] [luastg] 已清空资源池 'stage'
+[2026-05-08 23:22:35] [I] [luastg] 清空所有游戏资源
+[2026-05-08 23:22:35] [I] [luastg] 卸载所有资源包
+[2026-05-08 23:22:35] [I] [luastg] 引擎关闭

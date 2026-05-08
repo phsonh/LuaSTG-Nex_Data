@@ -1,6 +1,7 @@
 local class = require("class.class")
 local Unit = require("class.unit")
 local Visual = require("class.visual")
+local Chip = require("class.chip")
 
 local unit_manager = require("manager.unit_manager")
 local visual_manager = require("manager.visual_manager")
@@ -24,11 +25,11 @@ function M.install()
     end
     installed = true
 
-    -- 少量 DSL 级全局
     export("Class", class.Class)
 
     export("Unit", Unit)
     export("Visual", Visual)
+    export("Chip", Chip)
 
     export("New", unit_manager.spawn)
     export("Del", unit_manager.delete)
@@ -38,6 +39,10 @@ function M.install()
     export("NewVisual", visual_manager.spawn)
     export("DelVisual", visual_manager.delete)
     export("IsVisualValid", visual_manager.is_valid)
+
+    export("NewChip", visual_manager.spawn_chip)
+    export("DelChip", visual_manager.delete_chip)
+    export("IsChipValid", visual_manager.is_chip_valid)
 
     export("Include", function(path)
         return lstg.DoFile(path)
@@ -70,7 +75,6 @@ function M.install()
         export("Color", lstg.Color)
     end
 
-    -- 命名空间导出
     export("Resource", Resource)
     export("Render", Render)
     export("Audio", Audio)

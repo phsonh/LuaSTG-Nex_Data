@@ -7,7 +7,7 @@ local M = {}
 function M.init()
     Lapi.install()
 
-    Console.Log("[thlib.runtime] init")
+    Console.Print("[thlib.runtime] init")
 
     lstg.DoFile("root.lua")
 end
@@ -24,7 +24,7 @@ function M.shutdown()
     local unit_manager = require("manager.unit_manager")
     local visual_manager = require("manager.visual_manager")
 
-    Console.Log("[thlib.runtime] shutdown")
+    Console.Print("[thlib.runtime] shutdown")
 
     visual_manager.clear()
     unit_manager.clear()

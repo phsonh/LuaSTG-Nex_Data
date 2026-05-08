@@ -1,6 +1,13 @@
 local M = {}
 
+function M.Print(...)
+    return lstg.Log(2, ...)
+end
+
 function M.Log(level, ...)
+    if type(level) == "number" then
+        return lstg.Log(level, ...)
+    end
     return lstg.Log(2, level, ...)
 end
 
@@ -14,10 +21,6 @@ end
 
 function M.Error(...)
     return lstg.Log(0, ...)
-end
-
-function M.Print(...)
-    return lstg.Log(2, ...)
 end
 
 return M
