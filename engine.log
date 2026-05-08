@@ -1,18 +1,18 @@
-[2026-05-08 15:51:51] [I] Duration before logging system: 0.0185928s
-[2026-05-08 15:51:51] [I] LuaSTG Nexus v0.1.2
-[2026-05-08 15:51:51] [I] [luastg] 初始化引擎
-[2026-05-08 15:51:51] [I] [luastg] 初始化对象池，容量32768
-[2026-05-08 15:51:51] [I] [luastg] 初始化luajit引擎
-[2026-05-08 15:51:51] [I] [luajit] LuaJIT 2.1.1778074285
-[2026-05-08 15:51:51] [I] [luajit] 注册标准库与内置包
-[2026-05-08 15:51:51] [I] [luajit] [0] E:\STG\LuaSTG-Future\LuaSTG-Data\LuaSTG-Nex_Data\LuaSTGSub.exe
-[2026-05-08 15:51:51] [I] [luastg] load configuration from script 'launch'
-[2026-05-08 15:51:51] [I] [core] System: Windows 11 25H2
-[2026-05-08 15:51:51] [I] [core] Kernel: NT OS Kernel 10.0.26100.8246 Kernel32 10.0.26100.8246
-[2026-05-08 15:51:51] [I] [core] CPU: 11th Gen Intel(R) Core(TM) i5-1155G7 @ 2.50GHz
-[2026-05-08 15:51:51] [I] [core] [GraphicsDevice] initializing...
-[2026-05-08 15:51:51] [I] [core] [GraphicsDevice] enumerate physical devices
-[2026-05-08 15:51:51] [I] [core] [GraphicsDeviceManager] Graphics System details:
+[2026-05-08 16:33:59] [I] Duration before logging system: 0.0191247s
+[2026-05-08 16:33:59] [I] LuaSTG Nexus v0.1.2
+[2026-05-08 16:33:59] [I] [luastg] 初始化引擎
+[2026-05-08 16:33:59] [I] [luastg] 初始化对象池，容量32768
+[2026-05-08 16:33:59] [I] [luastg] 初始化luajit引擎
+[2026-05-08 16:33:59] [I] [luajit] LuaJIT 2.1.1778074285
+[2026-05-08 16:33:59] [I] [luajit] 注册标准库与内置包
+[2026-05-08 16:33:59] [I] [luajit] [0] E:\STG\LuaSTG-Future\LuaSTG-Data\LuaSTG-Nex_Data\LuaSTGSub.exe
+[2026-05-08 16:33:59] [I] [luastg] load configuration from script 'launch'
+[2026-05-08 16:33:59] [I] [core] System: Windows 11 25H2
+[2026-05-08 16:33:59] [I] [core] Kernel: NT OS Kernel 10.0.26100.8246 Kernel32 10.0.26100.8246
+[2026-05-08 16:33:59] [I] [core] CPU: 11th Gen Intel(R) Core(TM) i5-1155G7 @ 2.50GHz
+[2026-05-08 16:33:59] [I] [core] [GraphicsDevice] initializing...
+[2026-05-08 16:33:59] [I] [core] [GraphicsDevice] enumerate physical devices
+[2026-05-08 16:33:59] [I] [core] [GraphicsDeviceManager] Graphics System details:
     Features:
         Present allow tearing (Windows DXGI): supported
     Physical devices:
@@ -25,7 +25,7 @@
             Dedicated video memory: 134217728 (128.000MiB)
             Dedicated system memory: 0 (0B)
             Shared system memory: 4181356544 (3.894GiB)
-            Adapter LUID: 00000000-00009d24
+            Adapter LUID: 00000000-00009c5c
             Flags: ACG_COMPATIBLE SUPPORT_MONITORED_FENCES KEYED_MUTEX_CONFORMANCE
             Graphics preemption granularity: PRIMITIVE_BOUNDARY
             Compute preemption granularity: THREAD_GROUP_BOUNDARY
@@ -39,12 +39,12 @@
             Dedicated video memory: 0 (0B)
             Dedicated system memory: 0 (0B)
             Shared system memory: 4181356544 (3.894GiB)
-            Adapter LUID: 00000000-0000a30d
+            Adapter LUID: 00000000-0000a233
             Flags: SOFTWARE ACG_COMPATIBLE SUPPORT_MONITORED_FENCES KEYED_MUTEX_CONFORMANCE
             Graphics preemption granularity: INSTRUCTION_BOUNDARY
             Compute preemption granularity: INSTRUCTION_BOUNDARY
-[2026-05-08 15:51:51] [I] [core] [GraphicsDevice] current physical device: Intel(R) Iris(R) Xe Graphics
-[2026-05-08 15:51:51] [I] [core] [GraphicsDevice] device feature support details:
+[2026-05-08 16:33:59] [I] [core] [GraphicsDevice] current physical device: Intel(R) Iris(R) Xe Graphics
+[2026-05-08 16:33:59] [I] [core] [GraphicsDevice] device feature support details:
     Direct3D feature level: 12.1
     Threading:
         Driver concurrent creates: supported
@@ -114,7 +114,7 @@
     Displayable:
         Displayable texture: not supported
         Shared resource tier: 3
-[2026-05-08 15:51:51] [I] [core] [GraphicsDevice] device format support details:
+[2026-05-08 16:33:59] [I] [core] [GraphicsDevice] device format support details:
     R32G32B32A32_TYPELESS: TEXTURE1D TEXTURE2D TEXTURE3D TEXTURECUBE MIP CPU_LOCKABLE CAST_WITHIN_BIT_LAYOUT TILED SHAREABLE
     R32G32B32A32_FLOAT: BUFFER IA_VERTEX_BUFFER SO_BUFFER TEXTURE1D TEXTURE2D TEXTURE3D TEXTURECUBE SHADER_LOAD SHADER_SAMPLE MIP MIP_AUTOGEN RENDER_TARGET BLENDABLE CPU_LOCKABLE MULTISAMPLE_RESOLVE CAST_WITHIN_BIT_LAYOUT MULTISAMPLE_RENDERTARGET MULTISAMPLE_LOAD SHADER_GATHER TYPED_UNORDERED_ACCESS_VIEW UAV_TYPED_LOAD UAV_TYPED_STORE TILED SHAREABLE
     R32G32B32A32_UINT: BUFFER IA_VERTEX_BUFFER SO_BUFFER TEXTURE1D TEXTURE2D TEXTURE3D TEXTURECUBE SHADER_LOAD MIP RENDER_TARGET CPU_LOCKABLE CAST_WITHIN_BIT_LAYOUT MULTISAMPLE_RENDERTARGET MULTISAMPLE_LOAD TYPED_UNORDERED_ACCESS_VIEW UAV_TYPED_LOAD UAV_TYPED_STORE OUTPUT_MERGER_LOGIC_OP TILED SHAREABLE
@@ -236,12 +236,12 @@
     SAMPLER_FEEDBACK_MIN_MIP_OPAQUE:
     SAMPLER_FEEDBACK_MIP_REGION_USED_OPAQUE:
     A4B4G4R4_UNORM:
-[2026-05-08 15:51:51] [I] [core] [GraphicsDevice] initialization complete
-[2026-05-08 15:51:51] [I] [core] Graphics Device: Intel(R) Iris(R) Xe Graphics
+[2026-05-08 16:33:59] [I] [core] [GraphicsDevice] initialization complete
+[2026-05-08 16:33:59] [I] [core] Graphics Device: Intel(R) Iris(R) Xe Graphics
     Direct Flip Support: true
     Independent Flip Support: true
     Present Allow Tearing: true
-[2026-05-08 15:51:51] [I] [core] Display Output: Intel(R) Iris(R) Xe Graphics -> \\.\DISPLAY1
+[2026-05-08 16:33:59] [I] [core] Display Output: Intel(R) Iris(R) Xe Graphics -> \\.\DISPLAY1
     Overlays Support: true
     Multi Plane Overlay:
         Support: true
@@ -267,17 +267,17 @@
         Fullscreen: true
         Windowed: true
         Cursor Stretched: false
-[2026-05-08 15:51:51] [I] [core] [SwapChain] creating...
-[2026-05-08 15:51:51] [I] [core] [SwapChain] created:
+[2026-05-08 16:33:59] [I] [core] [SwapChain] creating...
+[2026-05-08 16:33:59] [I] [core] [SwapChain] created:
     Display Mode: 640x480
     Buffer Count: 3
     Swap Effect: FLIP_DISCARD
     Present Allow Tearing: true
     Frame Latency Waitable Object: true
-[2026-05-08 15:51:51] [I] [core] [Renderer] initializing...
-[2026-05-08 15:51:51] [I] [core] [Renderer] initialization complete
-[2026-05-08 15:51:52] [I] [luastg] 成功创建了 0 个控制器
-[2026-05-08 15:51:52] [I] [core] Display Output: Intel(R) Iris(R) Xe Graphics -> \\.\DISPLAY1
+[2026-05-08 16:33:59] [I] [core] [Renderer] initializing...
+[2026-05-08 16:33:59] [I] [core] [Renderer] initialization complete
+[2026-05-08 16:33:59] [I] [luastg] 成功创建了 0 个控制器
+[2026-05-08 16:33:59] [I] [core] Display Output: Intel(R) Iris(R) Xe Graphics -> \\.\DISPLAY1
     Overlays Support: true
     Multi Plane Overlay:
         Support: true
@@ -303,32 +303,237 @@
         Fullscreen: true
         Windowed: true
         Cursor Stretched: false
-[2026-05-08 15:51:52] [I] [core] [SwapChain] creating...
-[2026-05-08 15:51:52] [I] [core] [SwapChain] created:
+[2026-05-08 16:33:59] [I] [core] [SwapChain] creating...
+[2026-05-08 16:33:59] [I] [core] [SwapChain] created:
     Display Mode: 640x480
     Buffer Count: 3
     Swap Effect: FLIP_DISCARD
     Present Allow Tearing: true
     Frame Latency Waitable Object: true
-[2026-05-08 15:51:52] [I] [luastg] loading main script
-[2026-05-08 15:51:52] [I] [luastg] main script 'core.lua' loaded
-[2026-05-08 15:51:52] [I] [luastg] 初始化完成
-[2026-05-08 15:51:52] [I] [lua] [thlib.runtime] init
-[2026-05-08 15:51:52] [I] [luastg] 加载脚本'root.lua'
-[2026-05-08 15:51:52] [I] [lua] [mod/Test] root.lua loaded
-[2026-05-08 15:51:52] [I] [luastg] 加载脚本'script.lua'
-[2026-05-08 15:51:52] [I] [lua] [test_unit] init id=1 x=100.00 y=200.00
-[2026-05-08 15:51:52] [I] Duration of initialization: 0.2303198s
-[2026-05-08 15:51:52] [I] [luastg] 开始更新&渲染循环
-[2026-05-08 15:51:53] [I] [lua] [test_unit] timer=60 x=160.00 y=230.00 rot=60.00 count=1
-[2026-05-08 15:51:54] [I] [lua] [test_unit] timer=120 x=220.00 y=260.00 rot=120.00 count=1
-[2026-05-08 15:51:55] [I] [lua] [test_unit] timer=180 x=280.00 y=290.00 rot=180.00 count=1
-[2026-05-08 15:51:55] [I] [luastg] 结束更新&渲染循环
-[2026-05-08 15:51:55] [I] [lua] [thlib.runtime] shutdown
-[2026-05-08 15:51:55] [I] [luastg] 清空对象池
-[2026-05-08 15:51:55] [I] [luastg] 关闭luajit引擎
-[2026-05-08 15:51:55] [I] [luastg] 已清空资源池 'global'
-[2026-05-08 15:51:55] [I] [luastg] 已清空资源池 'stage'
-[2026-05-08 15:51:55] [I] [luastg] 清空所有游戏资源
-[2026-05-08 15:51:55] [I] [luastg] 卸载所有资源包
-[2026-05-08 15:51:55] [I] [luastg] 引擎关闭
+[2026-05-08 16:33:59] [I] [luastg] loading main script
+[2026-05-08 16:33:59] [I] [luastg] main script 'core.lua' loaded
+[2026-05-08 16:33:59] [I] [luastg] 初始化完成
+[2026-05-08 16:33:59] [I] [lua] [thlib.runtime] init
+[2026-05-08 16:33:59] [I] [luastg] 加载脚本'root.lua'
+[2026-05-08 16:33:59] [I] [lua] [mod/Test] root.lua loaded
+[2026-05-08 16:33:59] [I] [luastg] 加载脚本'script.lua'
+[2026-05-08 16:33:59] [I] [lua] [test_unit] init x=1.00 y=0.00 rot=0.00 vx=3.14 vy=0.00
+[2026-05-08 16:33:59] [I] Duration of initialization: 0.298803s
+[2026-05-08 16:33:59] [I] [luastg] 开始更新&渲染循环
+[2026-05-08 16:33:59] [I] [lua] [test_unit] timer=1 x=4.14 y=0.00 rot=1.00 vx=3.14 vy=0.05
+[2026-05-08 16:33:59] [I] [lua] [test_unit] timer=2 x=7.28 y=0.05 rot=2.00 vx=3.14 vy=0.11
+[2026-05-08 16:33:59] [I] [lua] [test_unit] timer=3 x=10.42 y=0.16 rot=3.00 vx=3.14 vy=0.16
+[2026-05-08 16:33:59] [I] [lua] [test_unit] timer=4 x=13.56 y=0.33 rot=4.00 vx=3.13 vy=0.22
+[2026-05-08 16:33:59] [I] [lua] [test_unit] timer=5 x=16.69 y=0.55 rot=5.00 vx=3.13 vy=0.27
+[2026-05-08 16:33:59] [I] [lua] [test_unit] timer=6 x=19.82 y=0.82 rot=6.00 vx=3.12 vy=0.33
+[2026-05-08 16:33:59] [I] [lua] [test_unit] timer=7 x=22.95 y=1.15 rot=7.00 vx=3.12 vy=0.38
+[2026-05-08 16:33:59] [I] [lua] [test_unit] timer=8 x=26.07 y=1.53 rot=8.00 vx=3.11 vy=0.44
+[2026-05-08 16:33:59] [I] [lua] [test_unit] timer=9 x=29.18 y=1.97 rot=9.00 vx=3.10 vy=0.49
+[2026-05-08 16:33:59] [I] [lua] [test_unit] timer=10 x=32.28 y=2.46 rot=10.00 vx=3.09 vy=0.55
+[2026-05-08 16:33:59] [I] [lua] [test_unit] timer=11 x=35.37 y=3.01 rot=11.00 vx=3.08 vy=0.60
+[2026-05-08 16:33:59] [I] [lua] [test_unit] timer=12 x=38.46 y=3.61 rot=12.00 vx=3.07 vy=0.65
+[2026-05-08 16:33:59] [I] [lua] [test_unit] timer=13 x=41.53 y=4.26 rot=13.00 vx=3.06 vy=0.71
+[2026-05-08 16:33:59] [I] [lua] [test_unit] timer=14 x=44.59 y=4.97 rot=14.00 vx=3.05 vy=0.76
+[2026-05-08 16:33:59] [I] [lua] [test_unit] timer=15 x=47.64 y=5.73 rot=15.00 vx=3.03 vy=0.81
+[2026-05-08 16:33:59] [I] [lua] [test_unit] timer=16 x=50.67 y=6.54 rot=16.00 vx=3.02 vy=0.87
+[2026-05-08 16:33:59] [I] [lua] [test_unit] timer=17 x=53.69 y=7.41 rot=17.00 vx=3.00 vy=0.92
+[2026-05-08 16:33:59] [I] [lua] [test_unit] timer=18 x=56.70 y=8.32 rot=18.00 vx=2.99 vy=0.97
+[2026-05-08 16:33:59] [I] [lua] [test_unit] timer=19 x=59.69 y=9.30 rot=19.00 vx=2.97 vy=1.02
+[2026-05-08 16:34:00] [I] [lua] [test_unit] timer=20 x=62.66 y=10.32 rot=20.00 vx=2.95 vy=1.07
+[2026-05-08 16:34:00] [I] [lua] [test_unit] timer=21 x=65.61 y=11.39 rot=21.00 vx=2.93 vy=1.13
+[2026-05-08 16:34:00] [I] [lua] [test_unit] timer=22 x=68.54 y=12.52 rot=22.00 vx=2.91 vy=1.18
+[2026-05-08 16:34:00] [I] [lua] [test_unit] timer=23 x=71.45 y=13.70 rot=23.00 vx=2.89 vy=1.23
+[2026-05-08 16:34:00] [I] [lua] [test_unit] timer=24 x=74.35 y=14.92 rot=24.00 vx=2.87 vy=1.28
+[2026-05-08 16:34:00] [I] [lua] [test_unit] timer=25 x=77.22 y=16.20 rot=25.00 vx=2.85 vy=1.33
+[2026-05-08 16:34:00] [I] [lua] [test_unit] timer=26 x=80.06 y=17.53 rot=26.00 vx=2.82 vy=1.38
+[2026-05-08 16:34:00] [I] [lua] [test_unit] timer=27 x=82.89 y=18.91 rot=27.00 vx=2.80 vy=1.43
+[2026-05-08 16:34:00] [I] [lua] [test_unit] timer=28 x=85.69 y=20.33 rot=28.00 vx=2.77 vy=1.47
+[2026-05-08 16:34:00] [I] [lua] [test_unit] timer=29 x=88.46 y=21.81 rot=29.00 vx=2.75 vy=1.52
+[2026-05-08 16:34:00] [I] [lua] [test_unit] timer=30 x=91.21 y=23.33 rot=30.00 vx=2.72 vy=1.57
+[2026-05-08 16:34:00] [I] [lua] [test_unit] timer=31 x=93.93 y=24.90 rot=31.00 vx=2.69 vy=1.62
+[2026-05-08 16:34:00] [I] [lua] [test_unit] timer=32 x=96.62 y=26.52 rot=32.00 vx=2.66 vy=1.66
+[2026-05-08 16:34:00] [I] [lua] [test_unit] timer=33 x=99.29 y=28.18 rot=33.00 vx=2.63 vy=1.71
+[2026-05-08 16:34:00] [I] [lua] [test_unit] timer=34 x=101.92 y=29.89 rot=34.00 vx=2.60 vy=1.76
+[2026-05-08 16:34:00] [I] [lua] [test_unit] timer=35 x=104.53 y=31.65 rot=35.00 vx=2.57 vy=1.80
+[2026-05-08 16:34:00] [I] [lua] [test_unit] timer=36 x=107.10 y=33.45 rot=36.00 vx=2.54 vy=1.85
+[2026-05-08 16:34:00] [I] [lua] [test_unit] timer=37 x=109.64 y=35.30 rot=37.00 vx=2.51 vy=1.89
+[2026-05-08 16:34:00] [I] [lua] [test_unit] timer=38 x=112.15 y=37.19 rot=38.00 vx=2.48 vy=1.93
+[2026-05-08 16:34:00] [I] [lua] [test_unit] timer=39 x=114.62 y=39.12 rot=39.00 vx=2.44 vy=1.98
+[2026-05-08 16:34:00] [I] [lua] [test_unit] timer=40 x=117.07 y=41.10 rot=40.00 vx=2.41 vy=2.02
+[2026-05-08 16:34:00] [I] [lua] [test_unit] timer=41 x=119.47 y=43.12 rot=41.00 vx=2.37 vy=2.06
+[2026-05-08 16:34:00] [I] [lua] [test_unit] timer=42 x=121.84 y=45.18 rot=42.00 vx=2.33 vy=2.10
+[2026-05-08 16:34:00] [I] [lua] [test_unit] timer=43 x=124.18 y=47.28 rot=43.00 vx=2.30 vy=2.14
+[2026-05-08 16:34:00] [I] [lua] [test_unit] timer=44 x=126.48 y=49.43 rot=44.00 vx=2.26 vy=2.18
+[2026-05-08 16:34:00] [I] [lua] [test_unit] timer=45 x=128.74 y=51.61 rot=45.00 vx=2.22 vy=2.22
+[2026-05-08 16:34:00] [I] [lua] [test_unit] timer=46 x=130.96 y=53.83 rot=46.00 vx=2.18 vy=2.26
+[2026-05-08 16:34:00] [I] [lua] [test_unit] timer=47 x=133.14 y=56.09 rot=47.00 vx=2.14 vy=2.30
+[2026-05-08 16:34:00] [I] [lua] [test_unit] timer=48 x=135.28 y=58.39 rot=48.00 vx=2.10 vy=2.33
+[2026-05-08 16:34:00] [I] [lua] [test_unit] timer=49 x=137.38 y=60.72 rot=49.00 vx=2.06 vy=2.37
+[2026-05-08 16:34:00] [I] [lua] [test_unit] timer=50 x=139.45 y=63.09 rot=50.00 vx=2.02 vy=2.41
+[2026-05-08 16:34:00] [I] [lua] [test_unit] timer=51 x=141.46 y=65.50 rot=51.00 vx=1.98 vy=2.44
+[2026-05-08 16:34:00] [I] [lua] [test_unit] timer=52 x=143.44 y=67.94 rot=52.00 vx=1.93 vy=2.48
+[2026-05-08 16:34:00] [I] [lua] [test_unit] timer=53 x=145.38 y=70.42 rot=53.00 vx=1.89 vy=2.51
+[2026-05-08 16:34:00] [I] [lua] [test_unit] timer=54 x=147.27 y=72.93 rot=54.00 vx=1.85 vy=2.54
+[2026-05-08 16:34:00] [I] [lua] [test_unit] timer=55 x=149.11 y=75.47 rot=55.00 vx=1.80 vy=2.57
+[2026-05-08 16:34:00] [I] [lua] [test_unit] timer=56 x=150.92 y=78.04 rot=56.00 vx=1.76 vy=2.60
+[2026-05-08 16:34:00] [I] [lua] [test_unit] timer=57 x=152.67 y=80.65 rot=57.00 vx=1.71 vy=2.63
+[2026-05-08 16:34:00] [I] [lua] [test_unit] timer=58 x=154.38 y=83.28 rot=58.00 vx=1.66 vy=2.66
+[2026-05-08 16:34:00] [I] [lua] [test_unit] timer=59 x=156.05 y=85.94 rot=59.00 vx=1.62 vy=2.69
+[2026-05-08 16:34:00] [I] [lua] [test_unit] timer=60 x=157.67 y=88.64 rot=60.00 vx=1.57 vy=2.72
+[2026-05-08 16:34:00] [I] [lua] [test_unit] timer=61 x=159.24 y=91.36 rot=61.00 vx=1.52 vy=2.75
+[2026-05-08 16:34:00] [I] [lua] [test_unit] timer=62 x=160.76 y=94.11 rot=62.00 vx=1.47 vy=2.77
+[2026-05-08 16:34:00] [I] [lua] [test_unit] timer=63 x=162.23 y=96.88 rot=63.00 vx=1.43 vy=2.80
+[2026-05-08 16:34:00] [I] [lua] [test_unit] timer=64 x=163.66 y=99.68 rot=64.00 vx=1.38 vy=2.82
+[2026-05-08 16:34:00] [I] [lua] [test_unit] timer=65 x=165.04 y=102.50 rot=65.00 vx=1.33 vy=2.85
+[2026-05-08 16:34:00] [I] [lua] [test_unit] timer=66 x=166.37 y=105.35 rot=66.00 vx=1.28 vy=2.87
+[2026-05-08 16:34:00] [I] [lua] [test_unit] timer=67 x=167.64 y=108.22 rot=67.00 vx=1.23 vy=2.89
+[2026-05-08 16:34:00] [I] [lua] [test_unit] timer=68 x=168.87 y=111.11 rot=68.00 vx=1.18 vy=2.91
+[2026-05-08 16:34:00] [I] [lua] [test_unit] timer=69 x=170.05 y=114.02 rot=69.00 vx=1.13 vy=2.93
+[2026-05-08 16:34:00] [I] [lua] [test_unit] timer=70 x=171.17 y=116.96 rot=70.00 vx=1.07 vy=2.95
+[2026-05-08 16:34:00] [I] [lua] [test_unit] timer=71 x=172.25 y=119.91 rot=71.00 vx=1.02 vy=2.97
+[2026-05-08 16:34:00] [I] [lua] [test_unit] timer=72 x=173.27 y=122.88 rot=72.00 vx=0.97 vy=2.99
+[2026-05-08 16:34:00] [I] [lua] [test_unit] timer=73 x=174.24 y=125.87 rot=73.00 vx=0.92 vy=3.00
+[2026-05-08 16:34:00] [I] [lua] [test_unit] timer=74 x=175.16 y=128.87 rot=74.00 vx=0.87 vy=3.02
+[2026-05-08 16:34:00] [I] [lua] [test_unit] timer=75 x=176.03 y=131.89 rot=75.00 vx=0.81 vy=3.03
+[2026-05-08 16:34:00] [I] [lua] [test_unit] timer=76 x=176.84 y=134.93 rot=76.00 vx=0.76 vy=3.05
+[2026-05-08 16:34:00] [I] [lua] [test_unit] timer=77 x=177.60 y=137.97 rot=77.00 vx=0.71 vy=3.06
+[2026-05-08 16:34:00] [I] [lua] [test_unit] timer=78 x=178.31 y=141.04 rot=78.00 vx=0.65 vy=3.07
+[2026-05-08 16:34:00] [I] [lua] [test_unit] timer=79 x=178.96 y=144.11 rot=79.00 vx=0.60 vy=3.08
+[2026-05-08 16:34:01] [I] [lua] [test_unit] timer=80 x=179.56 y=147.19 rot=80.00 vx=0.55 vy=3.09
+[2026-05-08 16:34:01] [I] [lua] [test_unit] timer=81 x=180.10 y=150.29 rot=81.00 vx=0.49 vy=3.10
+[2026-05-08 16:34:01] [I] [lua] [test_unit] timer=82 x=180.60 y=153.39 rot=82.00 vx=0.44 vy=3.11
+[2026-05-08 16:34:01] [I] [lua] [test_unit] timer=83 x=181.03 y=156.50 rot=83.00 vx=0.38 vy=3.12
+[2026-05-08 16:34:01] [I] [lua] [test_unit] timer=84 x=181.42 y=159.62 rot=84.00 vx=0.33 vy=3.12
+[2026-05-08 16:34:01] [I] [lua] [test_unit] timer=85 x=181.74 y=162.74 rot=85.00 vx=0.27 vy=3.13
+[2026-05-08 16:34:01] [I] [lua] [test_unit] timer=86 x=182.02 y=165.87 rot=86.00 vx=0.22 vy=3.13
+[2026-05-08 16:34:01] [I] [lua] [test_unit] timer=87 x=182.24 y=169.01 rot=87.00 vx=0.16 vy=3.14
+[2026-05-08 16:34:01] [I] [lua] [test_unit] timer=88 x=182.40 y=172.14 rot=88.00 vx=0.11 vy=3.14
+[2026-05-08 16:34:01] [I] [lua] [test_unit] timer=89 x=182.51 y=175.28 rot=89.00 vx=0.05 vy=3.14
+[2026-05-08 16:34:01] [I] [lua] [test_unit] timer=90 x=182.57 y=178.42 rot=90.00 vx=-0.00 vy=3.14
+[2026-05-08 16:34:01] [I] [lua] [test_unit] timer=91 x=182.57 y=181.57 rot=91.00 vx=-0.05 vy=3.14
+[2026-05-08 16:34:01] [I] [lua] [test_unit] timer=92 x=182.51 y=184.71 rot=92.00 vx=-0.11 vy=3.14
+[2026-05-08 16:34:01] [I] [lua] [test_unit] timer=93 x=182.40 y=187.85 rot=93.00 vx=-0.16 vy=3.14
+[2026-05-08 16:34:01] [I] [lua] [test_unit] timer=94 x=182.24 y=190.98 rot=94.00 vx=-0.22 vy=3.13
+[2026-05-08 16:34:01] [I] [lua] [test_unit] timer=95 x=182.02 y=194.12 rot=95.00 vx=-0.27 vy=3.13
+[2026-05-08 16:34:01] [I] [lua] [test_unit] timer=96 x=181.74 y=197.25 rot=96.00 vx=-0.33 vy=3.12
+[2026-05-08 16:34:01] [I] [lua] [test_unit] timer=97 x=181.42 y=200.37 rot=97.00 vx=-0.38 vy=3.12
+[2026-05-08 16:34:01] [I] [lua] [test_unit] timer=98 x=181.03 y=203.49 rot=98.00 vx=-0.44 vy=3.11
+[2026-05-08 16:34:01] [I] [lua] [test_unit] timer=99 x=180.60 y=206.60 rot=99.00 vx=-0.49 vy=3.10
+[2026-05-08 16:34:01] [I] [lua] [test_unit] timer=100 x=180.10 y=209.70 rot=100.00 vx=-0.55 vy=3.09
+[2026-05-08 16:34:01] [I] [lua] [test_unit] timer=101 x=179.56 y=212.80 rot=101.00 vx=-0.60 vy=3.08
+[2026-05-08 16:34:01] [I] [lua] [test_unit] timer=102 x=178.96 y=215.88 rot=102.00 vx=-0.65 vy=3.07
+[2026-05-08 16:34:01] [I] [lua] [test_unit] timer=103 x=178.31 y=218.96 rot=103.00 vx=-0.71 vy=3.06
+[2026-05-08 16:34:01] [I] [lua] [test_unit] timer=104 x=177.60 y=222.02 rot=104.00 vx=-0.76 vy=3.05
+[2026-05-08 16:34:01] [I] [lua] [test_unit] timer=105 x=176.84 y=225.06 rot=105.00 vx=-0.81 vy=3.03
+[2026-05-08 16:34:01] [I] [lua] [test_unit] timer=106 x=176.03 y=228.10 rot=106.00 vx=-0.87 vy=3.02
+[2026-05-08 16:34:01] [I] [lua] [test_unit] timer=107 x=175.16 y=231.12 rot=107.00 vx=-0.92 vy=3.00
+[2026-05-08 16:34:01] [I] [lua] [test_unit] timer=108 x=174.24 y=234.12 rot=108.00 vx=-0.97 vy=2.99
+[2026-05-08 16:34:01] [I] [lua] [test_unit] timer=109 x=173.27 y=237.11 rot=109.00 vx=-1.02 vy=2.97
+[2026-05-08 16:34:01] [I] [lua] [test_unit] timer=110 x=172.25 y=240.08 rot=110.00 vx=-1.07 vy=2.95
+[2026-05-08 16:34:01] [I] [lua] [test_unit] timer=111 x=171.17 y=243.03 rot=111.00 vx=-1.13 vy=2.93
+[2026-05-08 16:34:01] [I] [lua] [test_unit] timer=112 x=170.05 y=245.97 rot=112.00 vx=-1.18 vy=2.91
+[2026-05-08 16:34:01] [I] [lua] [test_unit] timer=113 x=168.87 y=248.88 rot=113.00 vx=-1.23 vy=2.89
+[2026-05-08 16:34:01] [I] [lua] [test_unit] timer=114 x=167.64 y=251.77 rot=114.00 vx=-1.28 vy=2.87
+[2026-05-08 16:34:01] [I] [lua] [test_unit] timer=115 x=166.37 y=254.64 rot=115.00 vx=-1.33 vy=2.85
+[2026-05-08 16:34:01] [I] [lua] [test_unit] timer=116 x=165.04 y=257.49 rot=116.00 vx=-1.38 vy=2.82
+[2026-05-08 16:34:01] [I] [lua] [test_unit] timer=117 x=163.66 y=260.31 rot=117.00 vx=-1.43 vy=2.80
+[2026-05-08 16:34:01] [I] [lua] [test_unit] timer=118 x=162.23 y=263.11 rot=118.00 vx=-1.47 vy=2.77
+[2026-05-08 16:34:01] [I] [lua] [test_unit] timer=119 x=160.76 y=265.89 rot=119.00 vx=-1.52 vy=2.75
+[2026-05-08 16:34:01] [I] [lua] [test_unit] timer=120 x=159.24 y=268.63 rot=120.00 vx=-1.57 vy=2.72
+[2026-05-08 16:34:01] [I] [lua] [test_unit] timer=121 x=157.67 y=271.35 rot=121.00 vx=-1.62 vy=2.69
+[2026-05-08 16:34:01] [I] [lua] [test_unit] timer=122 x=156.05 y=274.05 rot=122.00 vx=-1.66 vy=2.66
+[2026-05-08 16:34:01] [I] [lua] [test_unit] timer=123 x=154.38 y=276.71 rot=123.00 vx=-1.71 vy=2.63
+[2026-05-08 16:34:01] [I] [lua] [test_unit] timer=124 x=152.67 y=279.35 rot=124.00 vx=-1.76 vy=2.60
+[2026-05-08 16:34:01] [I] [lua] [test_unit] timer=125 x=150.92 y=281.95 rot=125.00 vx=-1.80 vy=2.57
+[2026-05-08 16:34:01] [I] [lua] [test_unit] timer=126 x=149.11 y=284.52 rot=126.00 vx=-1.85 vy=2.54
+[2026-05-08 16:34:01] [I] [lua] [test_unit] timer=127 x=147.27 y=287.06 rot=127.00 vx=-1.89 vy=2.51
+[2026-05-08 16:34:01] [I] [lua] [test_unit] timer=128 x=145.38 y=289.57 rot=128.00 vx=-1.93 vy=2.48
+[2026-05-08 16:34:01] [I] [lua] [test_unit] timer=129 x=143.44 y=292.05 rot=129.00 vx=-1.98 vy=2.44
+[2026-05-08 16:34:01] [I] [lua] [test_unit] timer=130 x=141.46 y=294.49 rot=130.00 vx=-2.02 vy=2.41
+[2026-05-08 16:34:01] [I] [lua] [test_unit] timer=131 x=139.45 y=296.90 rot=131.00 vx=-2.06 vy=2.37
+[2026-05-08 16:34:01] [I] [lua] [test_unit] timer=132 x=137.38 y=299.27 rot=132.00 vx=-2.10 vy=2.33
+[2026-05-08 16:34:01] [I] [lua] [test_unit] timer=133 x=135.28 y=301.60 rot=133.00 vx=-2.14 vy=2.30
+[2026-05-08 16:34:01] [I] [lua] [test_unit] timer=134 x=133.14 y=303.90 rot=134.00 vx=-2.18 vy=2.26
+[2026-05-08 16:34:01] [I] [lua] [test_unit] timer=135 x=130.96 y=306.16 rot=135.00 vx=-2.22 vy=2.22
+[2026-05-08 16:34:01] [I] [lua] [test_unit] timer=136 x=128.74 y=308.38 rot=136.00 vx=-2.26 vy=2.18
+[2026-05-08 16:34:01] [I] [lua] [test_unit] timer=137 x=126.48 y=310.56 rot=137.00 vx=-2.30 vy=2.14
+[2026-05-08 16:34:01] [I] [lua] [test_unit] timer=138 x=124.18 y=312.71 rot=138.00 vx=-2.33 vy=2.10
+[2026-05-08 16:34:01] [I] [lua] [test_unit] timer=139 x=121.84 y=314.81 rot=139.00 vx=-2.37 vy=2.06
+[2026-05-08 16:34:02] [I] [lua] [test_unit] timer=140 x=119.47 y=316.87 rot=140.00 vx=-2.41 vy=2.02
+[2026-05-08 16:34:02] [I] [lua] [test_unit] timer=141 x=117.07 y=318.89 rot=141.00 vx=-2.44 vy=1.98
+[2026-05-08 16:34:02] [I] [lua] [test_unit] timer=142 x=114.62 y=320.87 rot=142.00 vx=-2.48 vy=1.93
+[2026-05-08 16:34:02] [I] [lua] [test_unit] timer=143 x=112.15 y=322.80 rot=143.00 vx=-2.51 vy=1.89
+[2026-05-08 16:34:02] [I] [lua] [test_unit] timer=144 x=109.64 y=324.69 rot=144.00 vx=-2.54 vy=1.85
+[2026-05-08 16:34:02] [I] [lua] [test_unit] timer=145 x=107.10 y=326.54 rot=145.00 vx=-2.57 vy=1.80
+[2026-05-08 16:34:02] [I] [lua] [test_unit] timer=146 x=104.53 y=328.34 rot=146.00 vx=-2.60 vy=1.76
+[2026-05-08 16:34:02] [I] [lua] [test_unit] timer=147 x=101.92 y=330.10 rot=147.00 vx=-2.63 vy=1.71
+[2026-05-08 16:34:02] [I] [lua] [test_unit] timer=148 x=99.29 y=331.81 rot=148.00 vx=-2.66 vy=1.66
+[2026-05-08 16:34:02] [I] [lua] [test_unit] timer=149 x=96.62 y=333.47 rot=149.00 vx=-2.69 vy=1.62
+[2026-05-08 16:34:02] [I] [lua] [test_unit] timer=150 x=93.93 y=335.09 rot=150.00 vx=-2.72 vy=1.57
+[2026-05-08 16:34:02] [I] [lua] [test_unit] timer=151 x=91.21 y=336.66 rot=151.00 vx=-2.75 vy=1.52
+[2026-05-08 16:34:02] [I] [lua] [test_unit] timer=152 x=88.46 y=338.18 rot=152.00 vx=-2.77 vy=1.47
+[2026-05-08 16:34:02] [I] [lua] [test_unit] timer=153 x=85.69 y=339.66 rot=153.00 vx=-2.80 vy=1.43
+[2026-05-08 16:34:02] [I] [lua] [test_unit] timer=154 x=82.89 y=341.09 rot=154.00 vx=-2.82 vy=1.38
+[2026-05-08 16:34:02] [I] [lua] [test_unit] timer=155 x=80.06 y=342.46 rot=155.00 vx=-2.85 vy=1.33
+[2026-05-08 16:34:02] [I] [lua] [test_unit] timer=156 x=77.22 y=343.79 rot=156.00 vx=-2.87 vy=1.28
+[2026-05-08 16:34:02] [I] [lua] [test_unit] timer=157 x=74.35 y=345.07 rot=157.00 vx=-2.89 vy=1.23
+[2026-05-08 16:34:02] [I] [lua] [test_unit] timer=158 x=71.45 y=346.30 rot=158.00 vx=-2.91 vy=1.18
+[2026-05-08 16:34:02] [I] [lua] [test_unit] timer=159 x=68.54 y=347.47 rot=159.00 vx=-2.93 vy=1.13
+[2026-05-08 16:34:02] [I] [lua] [test_unit] timer=160 x=65.61 y=348.60 rot=160.00 vx=-2.95 vy=1.07
+[2026-05-08 16:34:02] [I] [lua] [test_unit] timer=161 x=62.66 y=349.67 rot=161.00 vx=-2.97 vy=1.02
+[2026-05-08 16:34:02] [I] [lua] [test_unit] timer=162 x=59.69 y=350.70 rot=162.00 vx=-2.99 vy=0.97
+[2026-05-08 16:34:02] [I] [lua] [test_unit] timer=163 x=56.70 y=351.67 rot=163.00 vx=-3.00 vy=0.92
+[2026-05-08 16:34:02] [I] [lua] [test_unit] timer=164 x=53.69 y=352.59 rot=164.00 vx=-3.02 vy=0.87
+[2026-05-08 16:34:02] [I] [lua] [test_unit] timer=165 x=50.67 y=353.45 rot=165.00 vx=-3.03 vy=0.81
+[2026-05-08 16:34:02] [I] [lua] [test_unit] timer=166 x=47.64 y=354.26 rot=166.00 vx=-3.05 vy=0.76
+[2026-05-08 16:34:02] [I] [lua] [test_unit] timer=167 x=44.59 y=355.02 rot=167.00 vx=-3.06 vy=0.71
+[2026-05-08 16:34:02] [I] [lua] [test_unit] timer=168 x=41.53 y=355.73 rot=168.00 vx=-3.07 vy=0.65
+[2026-05-08 16:34:02] [I] [lua] [test_unit] timer=169 x=38.46 y=356.38 rot=169.00 vx=-3.08 vy=0.60
+[2026-05-08 16:34:02] [I] [lua] [test_unit] timer=170 x=35.37 y=356.98 rot=170.00 vx=-3.09 vy=0.55
+[2026-05-08 16:34:02] [I] [lua] [test_unit] timer=171 x=32.28 y=357.53 rot=171.00 vx=-3.10 vy=0.49
+[2026-05-08 16:34:02] [I] [lua] [test_unit] timer=172 x=29.18 y=358.02 rot=172.00 vx=-3.11 vy=0.44
+[2026-05-08 16:34:02] [I] [lua] [test_unit] timer=173 x=26.07 y=358.46 rot=173.00 vx=-3.12 vy=0.38
+[2026-05-08 16:34:02] [I] [lua] [test_unit] timer=174 x=22.95 y=358.84 rot=174.00 vx=-3.12 vy=0.33
+[2026-05-08 16:34:02] [I] [lua] [test_unit] timer=175 x=19.82 y=359.17 rot=175.00 vx=-3.13 vy=0.27
+[2026-05-08 16:34:02] [I] [lua] [test_unit] timer=176 x=16.69 y=359.44 rot=176.00 vx=-3.13 vy=0.22
+[2026-05-08 16:34:02] [I] [lua] [test_unit] timer=177 x=13.56 y=359.66 rot=177.00 vx=-3.14 vy=0.16
+[2026-05-08 16:34:02] [I] [lua] [test_unit] timer=178 x=10.42 y=359.83 rot=178.00 vx=-3.14 vy=0.11
+[2026-05-08 16:34:02] [I] [lua] [test_unit] timer=179 x=7.28 y=359.94 rot=179.00 vx=-3.14 vy=0.05
+[2026-05-08 16:34:02] [I] [lua] [test_unit] timer=180 x=4.14 y=359.99 rot=180.00 vx=-3.14 vy=-0.00
+[2026-05-08 16:34:02] [I] [lua] [test_unit] timer=181 x=1.00 y=359.99 rot=-179.00 vx=-3.14 vy=-0.05
+[2026-05-08 16:34:02] [I] [lua] [test_unit] timer=182 x=-2.14 y=359.94 rot=-178.00 vx=-3.14 vy=-0.11
+[2026-05-08 16:34:02] [I] [lua] [test_unit] timer=183 x=-5.28 y=359.83 rot=-177.00 vx=-3.14 vy=-0.16
+[2026-05-08 16:34:02] [I] [lua] [test_unit] timer=184 x=-8.42 y=359.66 rot=-176.00 vx=-3.13 vy=-0.22
+[2026-05-08 16:34:02] [I] [lua] [test_unit] timer=185 x=-11.55 y=359.44 rot=-175.00 vx=-3.13 vy=-0.27
+[2026-05-08 16:34:02] [I] [lua] [test_unit] timer=186 x=-14.68 y=359.17 rot=-174.00 vx=-3.12 vy=-0.33
+[2026-05-08 16:34:02] [I] [lua] [test_unit] timer=187 x=-17.81 y=358.84 rot=-173.00 vx=-3.12 vy=-0.38
+[2026-05-08 16:34:02] [I] [lua] [test_unit] timer=188 x=-20.92 y=358.46 rot=-172.00 vx=-3.11 vy=-0.44
+[2026-05-08 16:34:02] [I] [lua] [test_unit] timer=189 x=-24.04 y=358.02 rot=-171.00 vx=-3.10 vy=-0.49
+[2026-05-08 16:34:02] [I] [lua] [test_unit] timer=190 x=-27.14 y=357.53 rot=-170.00 vx=-3.09 vy=-0.55
+[2026-05-08 16:34:02] [I] [lua] [test_unit] timer=191 x=-30.23 y=356.98 rot=-169.00 vx=-3.08 vy=-0.60
+[2026-05-08 16:34:02] [I] [lua] [test_unit] timer=192 x=-33.32 y=356.38 rot=-168.00 vx=-3.07 vy=-0.65
+[2026-05-08 16:34:02] [I] [lua] [test_unit] timer=193 x=-36.39 y=355.73 rot=-167.00 vx=-3.06 vy=-0.71
+[2026-05-08 16:34:02] [I] [lua] [test_unit] timer=194 x=-39.45 y=355.02 rot=-166.00 vx=-3.05 vy=-0.76
+[2026-05-08 16:34:02] [I] [lua] [test_unit] timer=195 x=-42.50 y=354.26 rot=-165.00 vx=-3.03 vy=-0.81
+[2026-05-08 16:34:02] [I] [lua] [test_unit] timer=196 x=-45.53 y=353.45 rot=-164.00 vx=-3.02 vy=-0.87
+[2026-05-08 16:34:02] [I] [lua] [test_unit] timer=197 x=-48.55 y=352.59 rot=-163.00 vx=-3.00 vy=-0.92
+[2026-05-08 16:34:02] [I] [lua] [test_unit] timer=198 x=-51.56 y=351.67 rot=-162.00 vx=-2.99 vy=-0.97
+[2026-05-08 16:34:02] [I] [lua] [test_unit] timer=199 x=-54.54 y=350.70 rot=-161.00 vx=-2.97 vy=-1.02
+[2026-05-08 16:34:03] [I] [lua] [test_unit] timer=200 x=-57.52 y=349.67 rot=-160.00 vx=-2.95 vy=-1.07
+[2026-05-08 16:34:03] [I] [lua] [test_unit] timer=201 x=-60.47 y=348.60 rot=-159.00 vx=-2.93 vy=-1.13
+[2026-05-08 16:34:03] [I] [lua] [test_unit] timer=202 x=-63.40 y=347.47 rot=-158.00 vx=-2.91 vy=-1.18
+[2026-05-08 16:34:03] [I] [lua] [test_unit] timer=203 x=-66.31 y=346.30 rot=-157.00 vx=-2.89 vy=-1.23
+[2026-05-08 16:34:03] [I] [lua] [test_unit] timer=204 x=-69.20 y=345.07 rot=-156.00 vx=-2.87 vy=-1.28
+[2026-05-08 16:34:03] [I] [lua] [test_unit] timer=205 x=-72.07 y=343.79 rot=-155.00 vx=-2.85 vy=-1.33
+[2026-05-08 16:34:03] [I] [lua] [test_unit] timer=206 x=-74.92 y=342.46 rot=-154.00 vx=-2.82 vy=-1.38
+[2026-05-08 16:34:03] [I] [lua] [test_unit] timer=207 x=-77.75 y=341.09 rot=-153.00 vx=-2.80 vy=-1.43
+[2026-05-08 16:34:03] [I] [lua] [test_unit] timer=208 x=-80.55 y=339.66 rot=-152.00 vx=-2.77 vy=-1.47
+[2026-05-08 16:34:03] [I] [luastg] 结束更新&渲染循环
+[2026-05-08 16:34:03] [I] [lua] [thlib.runtime] shutdown
+[2026-05-08 16:34:03] [I] [luastg] 清空对象池
+[2026-05-08 16:34:03] [I] [luastg] 关闭luajit引擎
+[2026-05-08 16:34:03] [I] [luastg] 已清空资源池 'global'
+[2026-05-08 16:34:03] [I] [luastg] 已清空资源池 'stage'
+[2026-05-08 16:34:03] [I] [luastg] 清空所有游戏资源
+[2026-05-08 16:34:03] [I] [luastg] 卸载所有资源包
+[2026-05-08 16:34:03] [I] [luastg] 引擎关闭
