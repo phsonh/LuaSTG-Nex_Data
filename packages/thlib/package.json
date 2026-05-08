@@ -1,4 +1,8 @@
 {
-  "name": "my-project",
-  "version": "1.0.0"
+  "name": "thlib",
+  "version": "0.1.0",
+  "description": "LuaSTG-Nex standard danmaku framework",
+  "type": "framework",
+  "entry": "core.lua",
+  "dependencies": {}
 }
