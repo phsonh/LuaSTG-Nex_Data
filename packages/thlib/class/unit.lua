@@ -8,6 +8,9 @@ end
 function Unit:frame()
 end
 
+function Unit:after_frame()
+end
+
 function Unit:del()
 end
 

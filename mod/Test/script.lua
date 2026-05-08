@@ -1,34 +1,22 @@
-test_unit = Class(Unit)
+circle_unit = Class(Unit)
 
-function test_unit:init()
-    self.x = 1
-    self.y = 0
-    SetV(self, 3.1415926, 0)
-    self.rot = 0
-    Log(2, string.format(
-        "[test_unit] init x=%.2f y=%.2f rot=%.2f vx=%.2f vy=%.2f",
-        self.x,
-        self.y,
-        self.rot,
-        self.vx,
-        self.vy
-    ))
+function circle_unit:init()
+    
 end
 
-function test_unit:frame()
-    self.rot = self.rot + 1
+function circle_unit:frame()
 
-    if self.timer % 1 == 0 then
-        Log(2, string.format(
-            "[test_unit] timer=%s x=%.2f y=%.2f rot=%.2f vx=%.2f vy=%.2f",
-            tostring(self.timer),
-            self.x,
-            self.y,
-            self.rot,
-            self.vx,
-            self.vy
-        ))
+end
+
+function circle_unit:after_frame()
+
+end
+
+New(circle_unit)
+
+for k, v in pairs(lstg) do
+    local s = tostring(k)
+    if s:find("Load") or s:find("Image") or s:find("Texture") or s:find("Sprite") then
+        Console.Log("[lstg api] " .. s .. " = " .. tostring(v))
     end
 end
-
-New(test_unit)

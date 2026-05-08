@@ -1,8 +1,17 @@
 local class = require("class.class")
 local Unit = require("class.unit")
+local Visual = require("class.visual")
+
 local unit_manager = require("manager.unit_manager")
+local visual_manager = require("manager.visual_manager")
+
+local Resource = require("driver.resource")
+local Render = require("driver.render")
+local Audio = require("driver.audio")
+local Console = require("console.init")
 
 local M = {}
+
 local installed = false
 
 local function export(name, value)
@@ -15,32 +24,30 @@ function M.install()
     end
     installed = true
 
-    -- class / unit DSL
+    -- 少量 DSL 级全局
     export("Class", class.Class)
-    export("Unit", Unit)
 
-    -- lifecycle
+    export("Unit", Unit)
+    export("Visual", Visual)
+
     export("New", unit_manager.spawn)
     export("Del", unit_manager.delete)
     export("Kill", unit_manager.delete)
     export("IsValid", unit_manager.is_valid)
 
-    -- script loading
+    export("NewVisual", visual_manager.spawn)
+    export("DelVisual", visual_manager.delete)
+    export("IsVisualValid", visual_manager.is_valid)
+
     export("Include", function(path)
         return lstg.DoFile(path)
     end)
 
-    -- logging
-    export("Log", lstg.Log)
-
-    -- motion helpers, angle is in degrees
-    export("SetV", function(obj, v, angle, update_rot)
+    export("SetV", function(obj, v, angle)
         local r = math.rad(angle)
         obj.vx = v * math.cos(r)
         obj.vy = v * math.sin(r)
-        if update_rot then
-            obj.rot = angle
-        end
+        obj.rot = angle
     end)
 
     export("SetA", function(obj, a, angle)
@@ -58,6 +65,16 @@ function M.install()
     export("Angle", function(a, b)
         return math.deg(math.atan2(b.y - a.y, b.x - a.x))
     end)
+
+    if _G.Color == nil and lstg.Color then
+        export("Color", lstg.Color)
+    end
+
+    -- 命名空间导出
+    export("Resource", Resource)
+    export("Render", Render)
+    export("Audio", Audio)
+    export("Console", Console)
 end
 
 return M

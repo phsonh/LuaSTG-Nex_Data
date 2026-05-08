@@ -127,18 +127,40 @@ function M.is_valid(unit)
 end
 
 function M.update_all()
-    -- Phase 1 order:
-    -- native movement/timer first, Lua behavior second.
-    -- This keeps timer and position visible to frame() after native update.
-    unit_driver.update_all()
+    -- 1. Lua 逻辑阶段：脚本决定本帧速度、加速度、rot、状态
+    local count = #units
 
-    local write_index = 1
-    for read_index = 1, #units do
-        local u = units[read_index]
+    for i = 1, count do
+        local u = units[i]
+
         if M.is_valid(u) then
             if u.frame then
                 u:frame()
             end
+        end
+    end
+
+    -- 2. Native 运动阶段：C++ UnitPool 根据 vx/vy/ax/ay/rot 更新坐标和 timer
+    unit_driver.update_all()
+
+    -- 3. Lua 后处理阶段：需要读取“移动后坐标”的逻辑放这里
+    for i = 1, count do
+        local u = units[i]
+
+        if M.is_valid(u) then
+            if u.after_frame then
+                u:after_frame()
+            end
+        end
+    end
+
+    -- 4. 清理无效 Unit
+    local write_index = 1
+
+    for read_index = 1, #units do
+        local u = units[read_index]
+
+        if M.is_valid(u) then
             units[write_index] = u
             write_index = write_index + 1
         end

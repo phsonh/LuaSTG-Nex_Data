@@ -1,2 +1,2 @@
-Log(2, "[mod/Test] root.lua loaded")
+Console.Log("[mod/Test] root.lua loaded")
 Include("script.lua")
