@@ -1,17 +1,1 @@
-[
-  {
-    "id": "thlib.default.bullet",
-    "enabled": true,
-    "path": "plugins/thlib.default.bullet/"
-  },
-  {
-    "id": "thlib.default.se",
-    "enabled": true,
-    "path": "plugins/thlib.default.se/"
-  },
-  {
-    "id": "thlib.default.ui",
-    "enabled": true,
-    "path": "plugins/thlib.default.ui/"
-  }
-]
+[]
