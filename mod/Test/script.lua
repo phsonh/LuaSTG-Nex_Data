@@ -11,6 +11,15 @@ function test_unit:init()
     self.visual = NewVisual(test_visual, self)
 
     Console.Print("[test_unit] created")
+    Console.Print("lstg.LoadTexture = " .. tostring(lstg.LoadTexture))
+    Console.Print("lstg.LoadImage = " .. tostring(lstg.LoadImage))
+    Console.Print("lstg.LoadAnimation = " .. tostring(lstg.LoadAnimation))
+    Console.Print("lstg.SetImageState = " .. tostring(lstg.SetImageState))
+
+    Console.Print("Resource.Image.LoadTexture = " .. tostring(Resource.Image.LoadTexture))
+    Console.Print("Resource.Image.LoadSprite = " .. tostring(Resource.Image.LoadSprite))
+    Console.Print("Resource.Audio.LoadSound = " .. tostring(Resource.Audio.LoadSound))
+    Console.Print("Resource.File.LoadText = " .. tostring(Resource.File.LoadText))
 end
 
 function test_unit:frame()
