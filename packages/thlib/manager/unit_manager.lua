@@ -1,5 +1,6 @@
 local Unit = require("class.unit")
 local unit_driver = require("driver.unit")
+local task = require("system.task")
 
 local M = {}
 
@@ -114,8 +115,12 @@ function M.spawn(class, ...)
 end
 
 function M.delete(unit)
-    if unit and unit.delete then
-        unit:delete()
+    if unit then
+        task.Clear(unit)
+
+        if unit.delete then
+            unit:delete()
+        end
     end
 end
 
@@ -137,13 +142,15 @@ function M.update_all()
             if u.frame then
                 u:frame()
             end
+
+            task.Do(u)
         end
     end
 
     -- 2. Native 运动阶段：C++ UnitPool 根据 vx/vy/ax/ay/rot 更新坐标和 timer
     unit_driver.update_all()
 
-    -- 3. Lua 后处理阶段：需要读取“移动后坐标”的逻辑放这里
+    -- 3. Lua 后处理阶段：需要读取移动后坐标的逻辑放这里
     for i = 1, count do
         local u = units[i]
 
@@ -174,11 +181,18 @@ end
 function M.clear()
     for i = #units, 1, -1 do
         local u = units[i]
-        if u and u.delete then
-            u:delete()
+
+        if u then
+            task.Clear(u)
+
+            if u.delete then
+                u:delete()
+            end
         end
+
         units[i] = nil
     end
+
     unit_driver.clear()
 end
 

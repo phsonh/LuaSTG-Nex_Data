@@ -1,5 +1,6 @@
 local Visual = require("class.visual")
 local Chip = require("class.chip")
+local task = require("system.task")
 
 local M = {}
 
@@ -125,6 +126,9 @@ function M.delete_chip(chip)
     end
 
     chip.__alive = false
+
+    local task = require("system.task")
+    task.Clear(chip)
 
     if chip.del then
         chip:del()

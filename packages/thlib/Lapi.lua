@@ -11,6 +11,9 @@ local Resource = require("driver.resource")
 local Render = require("driver.render")
 local Console = require("console.init")
 
+
+local task = require("system.task")
+
 local M = {}
 
 local installed = false
@@ -78,6 +81,7 @@ function M.install()
     export("Resource", Resource)
     export("Render", Render)
     export("Console", Console)
+    export("task", task)
 end
 
 return M
