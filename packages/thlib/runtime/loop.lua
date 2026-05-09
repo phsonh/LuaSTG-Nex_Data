@@ -14,7 +14,6 @@ function M.render()
     lstg.BeginScene()
 
     Render.SetViewMode("world")
-
     visual_manager.render_all()
 
     lstg.EndScene()

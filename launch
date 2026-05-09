@@ -1,13 +1,15 @@
--- LuaSTG-Nex minimal launch script
--- This file is executed before the main Lua entry script.
--- Do not load legacy THlib files here.
+package.cpath = package.cpath or ""
+package.path = table.concat({
+    "?.lua",
+    "?/init.lua",
+    "packages/thlib/?.lua",
+    "packages/thlib/?/init.lua",
+}, ";")
+
+local Config = require("driver.config")
+
+local cfg = Config.Load("config.json")
+Config.ApplyEngine(cfg)
+Config.PrintSummary()
 
 lstg.SetSplash(false)
-lstg.SetTitle("LuaSTG-Nex")
-lstg.SetWindowed(true)
---lstg.SetResolution(1280, 960)
-lstg.SetResolution(960, 720)
-lstg.SetFPS(60)
-lstg.SetVsync(true)
-lstg.SetSEVolume(1.0)
-lstg.SetBGMVolume(1.0)

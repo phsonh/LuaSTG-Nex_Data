@@ -1,8 +1,8 @@
---Resource.Image.LoadTexture("tex.ball", "ball_huge_blue.png")
---Resource.Image.LoadFullSprite("img.ball", "tex.ball", 1, 1)
+Resource.Image.LoadTexture("tex.ball", "ball_huge_blue.png")
+Resource.Image.LoadFullSprite("img.ball", "tex.ball", 0.5, 0.5)
 
-Resource.Image.LoadTexture("tex.ball", "crop.png")
-Resource.Image.LoadFullSprite("img.ball", "tex.ball", 1, 1)
+--Resource.Image.LoadTexture("tex.ball", "crop.png")
+--Resource.Image.LoadFullSprite("img.ball", "tex.ball", 0.5, 0.5)
 test_unit = Class(Unit)
 
 function test_unit:init()
@@ -17,8 +17,8 @@ function test_unit:init()
 end
 
 function test_unit:frame()
-    self.r = 100 * math.sin(self.timer/10000)
-    self.x,self.y = self.r * math.cos(self.ang),self.r * math.sin(self.ang)
+    --self.r = 100 * math.sin(self.timer/10000)
+    --self.x,self.y = self.r * math.cos(self.ang),self.r * math.sin(self.ang)
     self.ang = self.ang + 1
     
 end
