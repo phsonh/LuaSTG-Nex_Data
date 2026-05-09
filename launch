@@ -3,10 +3,11 @@
 -- Do not load legacy THlib files here.
 
 lstg.SetSplash(false)
-lstg.SetTitle("LuaSTG-Nex MVP")
+lstg.SetTitle("LuaSTG-Nex")
 lstg.SetWindowed(true)
-lstg.SetResolution(640, 480)
+--lstg.SetResolution(1280, 960)
+lstg.SetResolution(960, 720)
 lstg.SetFPS(60)
-lstg.SetVsync(false)
+lstg.SetVsync(true)
 lstg.SetSEVolume(1.0)
 lstg.SetBGMVolume(1.0)

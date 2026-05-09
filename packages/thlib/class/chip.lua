@@ -9,31 +9,21 @@ function Chip:init(master, visual)
     self.visual = visual
 
     self.img = "img_void"
-
-    -- local: 相对 master
-    -- world: 世界坐标
-    -- ui: 之后扩展 UI 坐标
-    self.space = "local"
-
+    -- 绝对坐标
     self.x = 0
     self.y = 0
     self.rot = 0
-
     self.scale_x = 1
     self.scale_y = 1
-
     self.blend = ""
     self.a = 255
     self.r = 255
     self.g = 255
     self.b = 255
-
     self.z = 0.5
-
     self.visible = true
     self.timer = 0
 end
-
 function Chip:frame()
 end
 
@@ -41,25 +31,10 @@ function Chip:render()
     if self.visible == false then
         return
     end
-
-    local img = self.img or "img_void"
-
-    local draw_x = self.x or 0
-    local draw_y = self.y or 0
-
-    if self.space ~= "world" then
-        local master = self.master
-
-        if master then
-            draw_x = master.x + draw_x
-            draw_y = master.y + draw_y
-        end
-    end
-
     Render.Sprite(
-        img,
-        draw_x,
-        draw_y,
+        self.img or "img_void",
+        self.x or 0,
+        self.y or 0,
         self.rot or 0,
         self.scale_x or 1,
         self.scale_y or 1,

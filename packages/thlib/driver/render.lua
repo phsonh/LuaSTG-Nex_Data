@@ -17,9 +17,6 @@ function M.SetViewMode(mode)
     require_view_api()
 
     if mode == "world" then
-        -- world 坐标：
-        -- 屏幕中心是 (0, 0)
-        -- 可见范围是 x=-320..320, y=-240..240
         lstg.SetOrtho(
             -HALF_VIEW_WIDTH,
             HALF_VIEW_WIDTH,
@@ -38,9 +35,6 @@ function M.SetViewMode(mode)
     end
 
     if mode == "ui" then
-        -- ui 坐标：
-        -- 左下角是 (0, 0)
-        -- 右上角是 (640, 480)
         lstg.SetOrtho(0, VIEW_WIDTH, 0, VIEW_HEIGHT)
         lstg.SetViewport(0, VIEW_WIDTH, 0, VIEW_HEIGHT)
         lstg.SetScissorRect(0, VIEW_WIDTH, 0, VIEW_HEIGHT)
@@ -57,38 +51,20 @@ end
 
 function M.Sprite(img, x, y, rot, scale_x, scale_y, blend, a, r, g, b, z)
     assert(img ~= nil, "Render.Sprite: img is nil")
-    assert(lstg.Render, "lstg.Render is nil")
+    assert(lstg.Renderer and lstg.Renderer.Sprite, "lstg.Renderer.Sprite is nil")
 
-    -- v0 暂时只支持基础 sprite 渲染。
-    -- blend / color 之后要接新的 C++ Render.SpriteEx。
-    -- 这里不要静默假装支持，否则后面很难排查。
-    if blend ~= nil and blend ~= "" then
-        error("Render.Sprite: blend is not supported yet in Render v0", 2)
-    end
-
-    if a ~= nil and a ~= 255 then
-        error("Render.Sprite: alpha/color is not supported yet in Render v0", 2)
-    end
-
-    if r ~= nil and r ~= 255 then
-        error("Render.Sprite: alpha/color is not supported yet in Render v0", 2)
-    end
-
-    if g ~= nil and g ~= 255 then
-        error("Render.Sprite: alpha/color is not supported yet in Render v0", 2)
-    end
-
-    if b ~= nil and b ~= 255 then
-        error("Render.Sprite: alpha/color is not supported yet in Render v0", 2)
-    end
-
-    return lstg.Render(
+    return lstg.Renderer.Sprite(
         img,
         x or 0,
         y or 0,
         rot or 0,
         scale_x or 1,
         scale_y or scale_x or 1,
+        blend or "",
+        a or 255,
+        r or 255,
+        g or 255,
+        b or 255,
         z or 0.5
     )
 end

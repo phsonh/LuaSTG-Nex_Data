@@ -1,54 +1,26 @@
-Resource.Image.LoadTexture("tex.ball", "ball_huge_blue.png")
-Resource.Image.LoadFullSprite("img.ball", "tex.ball", 1, 1)
+--Resource.Image.LoadTexture("tex.ball", "ball_huge_blue.png")
+--Resource.Image.LoadFullSprite("img.ball", "tex.ball", 1, 1)
 
+Resource.Image.LoadTexture("tex.ball", "crop.png")
+Resource.Image.LoadFullSprite("img.ball", "tex.ball", 1, 1)
 test_unit = Class(Unit)
 
 function test_unit:init()
     self.x = 0
     self.y = 0
     self.rot = 0
+    self.r = 0
+    self.ang = 0
+    --SetV(self,-3,0)
 
     self.visual = NewVisual(test_visual, self)
-
-    Console.Print("[test_unit] created")
-    Console.Print("lstg.LoadTexture = " .. tostring(lstg.LoadTexture))
-    Console.Print("lstg.LoadImage = " .. tostring(lstg.LoadImage))
-    Console.Print("lstg.LoadAnimation = " .. tostring(lstg.LoadAnimation))
-    Console.Print("lstg.SetImageState = " .. tostring(lstg.SetImageState))
-
-    Console.Print("Resource.Image.LoadTexture = " .. tostring(Resource.Image.LoadTexture))
-    Console.Print("Resource.Image.LoadSprite = " .. tostring(Resource.Image.LoadSprite))
-    Console.Print("Resource.Audio.LoadSound = " .. tostring(Resource.Audio.LoadSound))
-    Console.Print("Resource.File.LoadText = " .. tostring(Resource.File.LoadText))
-    Console.Print("lstg._New = " .. tostring(lstg._New))
-    Console.Print("lstg._Del = " .. tostring(lstg._Del))
-    Console.Print("lstg._Kill = " .. tostring(lstg._Kill))
-    Console.Print("lstg.ObjFrame = " .. tostring(lstg.ObjFrame))
-    Console.Print("lstg.ObjRender = " .. tostring(lstg.ObjRender))
-    Console.Print("lstg.CollisionCheck = " .. tostring(lstg.CollisionCheck))
-    Console.Print("lstg.DefaultRenderFunc = " .. tostring(lstg.DefaultRenderFunc))
-    Console.Print("lstg.SetImgState = " .. tostring(lstg.SetImgState))
-    Console.Print("lstg.GetAttr = " .. tostring(lstg.GetAttr))
-    Console.Print("lstg.SetAttr = " .. tostring(lstg.SetAttr))
-    Console.Print("lstg.IsValid = " .. tostring(lstg.IsValid))
-    Console.Print("lstg.GameObjectManager = " .. tostring(lstg.GameObjectManager))
-
-    Console.Print("global New = " .. tostring(New))
-    Console.Print("global IsValid = " .. tostring(IsValid))
-    Console.Print("lstg._New = " .. tostring(lstg._New))
-    Console.Print("lstg.ObjTable = " .. tostring(lstg.ObjTable))
-    Console.Print("lstg.ObjFrame = " .. tostring(lstg.ObjFrame))
-    Console.Print("lstg.ObjRender = " .. tostring(lstg.ObjRender))
-    Console.Print("lstg.CollisionCheck = " .. tostring(lstg.CollisionCheck))
-    Console.Print("lstg.DefaultRenderFunc = " .. tostring(lstg.DefaultRenderFunc))
-    Console.Print("lstg.IsValid = " .. tostring(lstg.IsValid))
-
-    Console.Print("global New = " .. tostring(New))
-    Console.Print("global IsValid = " .. tostring(IsValid))
 end
 
 function test_unit:frame()
-    self.rot = self.rot + 1
+    self.r = 100 * math.sin(self.timer/10000)
+    self.x,self.y = self.r * math.cos(self.ang),self.r * math.sin(self.ang)
+    self.ang = self.ang + 1
+    
 end
 
 test_visual = Class(Visual)
@@ -70,6 +42,17 @@ end
 
 function test_chip:frame()
     self.rot = self.master.rot
+    self.blend = "mul+add"
+
+    local phase = math.floor(self.timer / 60) % 3
+
+    if phase == 0 then
+        self.r, self.g, self.b = 0, 255, 255
+    elseif phase == 1 then
+        self.r, self.g, self.b = 255, 0, 255
+    else
+        self.r, self.g, self.b = 255, 255, 0
+    end
 end
 
 New(test_unit)
