@@ -1,0 +1,12 @@
+local M = {}
+
+M.BG = -700
+M.ENEMY = -600
+M.PLAYER_BULLET = -500
+M.PLAYER = -400
+M.ITEM = -300
+M.ENEMY_BULLET = -200
+M.ENEMY_BULLET_EF = -100
+M.TOP = 0
+
+return M

@@ -1,6 +1,7 @@
 local Visual = require("class.visual")
-local Chip = require("class.chip")
-local task = require("system.task")
+local Ani = require("class.ani")
+local Unit = require("class.unit")
+local Task = require("system.task")
 
 local M = {}
 
@@ -21,11 +22,11 @@ local function is_visual_class(class)
     return false
 end
 
-local function is_chip_class(class)
+local function is_ani_class(class)
     local cur = class
 
     while cur do
-        if cur == Chip or rawget(cur, "__is_chip_base") then
+        if cur == Ani or rawget(cur, "__is_ani_base") then
             return true
         end
 
@@ -40,20 +41,12 @@ local function is_valid_master(master)
         return true
     end
 
-    if IsValid then
-        return IsValid(master)
-    end
-
-    if master.isValid then
-        return master:isValid()
-    end
-
-    return true
+    return Unit.IsValid(master)
 end
 
 function M.spawn(class, master, ...)
-    assert(type(class) == "table", "NewVisual(class, master, ...): class must be a class table")
-    assert(is_visual_class(class), "NewVisual(class, master, ...): class must inherit from Visual")
+    assert(type(class) == "table", "Visual.New(class, master, ...): class must be a class table")
+    assert(is_visual_class(class), "Visual.New(class, master, ...): class must inherit from Visual")
 
     next_visual_order = next_visual_order + 1
 
@@ -61,7 +54,7 @@ function M.spawn(class, master, ...)
         __alive = true,
 
         master = master,
-        auto_delete_with_master = true,
+        auto_delete_with_master = master ~= nil,
 
         layer = 0,
         order = next_visual_order,
@@ -98,9 +91,9 @@ function M.is_valid(visual)
     return visual ~= nil and visual.__alive == true
 end
 
-function M.spawn_chip(class, master, visual, ...)
-    assert(type(class) == "table", "spawn_chip(class, master, visual, ...): class must be a class table")
-    assert(is_chip_class(class), "spawn_chip(class, master, visual, ...): class must inherit from Chip")
+function M.spawn_ani(class, master, visual, ...)
+    assert(type(class) == "table", "spawn_ani(class, master, visual, ...): class must be a class table")
+    assert(is_ani_class(class), "spawn_ani(class, master, visual, ...): class must inherit from Ani")
 
     local self = setmetatable({
         __alive = true,
@@ -116,27 +109,26 @@ function M.spawn_chip(class, master, visual, ...)
     return self
 end
 
-function M.delete_chip(chip)
-    if chip == nil then
+function M.delete_ani(ani)
+    if ani == nil then
         return
     end
 
-    if chip.__alive ~= true then
+    if ani.__alive ~= true then
         return
     end
 
-    chip.__alive = false
+    ani.__alive = false
 
-    local task = require("system.task")
-    task.Clear(chip)
+    Task.Clear(ani)
 
-    if chip.del then
-        chip:del()
+    if ani.del then
+        ani:del()
     end
 end
 
-function M.is_chip_valid(chip)
-    return chip ~= nil and chip.__alive == true
+function M.is_ani_valid(ani)
+    return ani ~= nil and ani.__alive == true
 end
 
 function M.update_all()
@@ -167,24 +159,38 @@ function M.update_all()
 end
 
 function M.render_all()
-    table.sort(visuals, function(a, b)
-        local la = a.layer or 0
-        local lb = b.layer or 0
-
-        if la ~= lb then
-            return la < lb
-        end
-
-        return (a.order or 0) < (b.order or 0)
-    end)
+    local render_list = {}
 
     for i = 1, #visuals do
         local visual = visuals[i]
 
         if M.is_valid(visual) and visual.visible ~= false then
-            if visual._render then
-                visual:_render()
+            local ani = visual.current_ani
+
+            if ani and ani.__alive == true and ani.visible ~= false then
+                render_list[#render_list + 1] = {
+                    visual = visual,
+                    ani = ani,
+                    layer = ani.layer ~= nil and ani.layer or visual.layer or 0,
+                    order = visual.order or 0,
+                }
             end
+        end
+    end
+
+    table.sort(render_list, function(a, b)
+        if a.layer ~= b.layer then
+            return a.layer < b.layer
+        end
+
+        return a.order < b.order
+    end)
+
+    for i = 1, #render_list do
+        local ani = render_list[i].ani
+
+        if ani.render then
+            ani:render()
         end
     end
 end

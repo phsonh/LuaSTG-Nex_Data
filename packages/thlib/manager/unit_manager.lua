@@ -1,6 +1,6 @@
 local Unit = require("class.unit")
-local unit_driver = require("driver.unit")
-local task = require("system.task")
+local unit_native = require("native.unit")
+local Task = require("system.task")
 
 local M = {}
 
@@ -31,24 +31,30 @@ local readonly_native_fields = {
 
 local function is_unit_class(class)
     local cur = class
+
     while cur do
         if cur == Unit or rawget(cur, "__is_unit_base") then
             return true
         end
+
         cur = rawget(cur, "__base")
     end
+
     return false
 end
 
 local function lookup_class_member(class, key)
     local cur = class
+
     while cur do
         local value = rawget(cur, key)
         if value ~= nil then
             return value
         end
+
         cur = rawget(cur, "__base")
     end
+
     return nil
 end
 
@@ -56,6 +62,12 @@ local function install_unit_proxy(class)
     if rawget(class, "__unit_proxy_installed") then
         return
     end
+
+    local has_frame = rawget(class, "frame") ~= nil and rawget(class, "frame") ~= Unit.frame
+    local has_after_frame = rawget(class, "after_frame") ~= nil and rawget(class, "after_frame") ~= Unit.after_frame
+
+    class.__has_frame = has_frame
+    class.__has_after_frame = has_after_frame
 
     class.__index = function(obj, key)
         local value = lookup_class_member(class, key)
@@ -93,12 +105,13 @@ local function install_unit_proxy(class)
 end
 
 function M.spawn(class, ...)
-    assert(type(class) == "table", "New(class, ...): class must be a class table")
-    assert(is_unit_class(class), "New(class, ...): class must inherit from Unit")
+    assert(type(class) == "table", "Unit.New(class, ...): class must be a class table")
+    assert(is_unit_class(class), "Unit.New(class, ...): class must inherit from Unit")
 
     install_unit_proxy(class)
 
-    local native = unit_driver.new()
+    local native = unit_native.new()
+
     local self = setmetatable({
         native = native,
         __alive = true,
@@ -115,12 +128,24 @@ function M.spawn(class, ...)
 end
 
 function M.delete(unit)
-    if unit then
-        task.Clear(unit)
+    if unit == nil then
+        return
+    end
 
-        if unit.delete then
-            unit:delete()
-        end
+    if unit.__alive ~= true then
+        return
+    end
+
+    Task.Clear(unit)
+
+    unit.__alive = false
+
+    if unit.del then
+        unit:del()
+    end
+
+    if unit.native and unit.native:isValid() then
+        unit.native:delete()
     end
 end
 
@@ -131,69 +156,71 @@ function M.is_valid(unit)
         and unit.native:isValid()
 end
 
+local function is_alive_fast(unit)
+    return unit ~= nil and unit.__alive == true
+end
+
 function M.update_all()
-    -- 1. Lua 逻辑阶段：脚本决定本帧速度、加速度、rot、状态
     local count = #units
 
     for i = 1, count do
-        local u = units[i]
+        local unit = units[i]
 
-        if M.is_valid(u) then
-            if u.frame then
-                u:frame()
+        if is_alive_fast(unit) then
+            local class = rawget(unit, "__class")
+
+            if class and class.__has_frame then
+                unit:frame()
             end
 
-            task.Do(u)
+            if rawget(unit, "task") ~= nil then
+                Task.Do(unit)
+            end
         end
     end
 
-    -- 2. Native 运动阶段：C++ UnitPool 根据 vx/vy/ax/ay/rot 更新坐标和 timer
-    unit_driver.update_all()
+    unit_native.update_all()
 
-    -- 3. Lua 后处理阶段：需要读取移动后坐标的逻辑放这里
     for i = 1, count do
-        local u = units[i]
+        local unit = units[i]
 
-        if M.is_valid(u) then
-            if u.after_frame then
-                u:after_frame()
+        if is_alive_fast(unit) then
+            local class = rawget(unit, "__class")
+
+            if class and class.__has_after_frame then
+                unit:after_frame()
             end
         end
     end
 
-    -- 4. 清理无效 Unit
     local write_index = 1
 
-    for read_index = 1, #units do
-        local u = units[read_index]
+    for read_index = 1, count do
+        local unit = units[read_index]
 
-        if M.is_valid(u) then
-            units[write_index] = u
+        if is_alive_fast(unit) then
+            units[write_index] = unit
             write_index = write_index + 1
         end
     end
 
-    for i = write_index, #units do
+    for i = write_index, count do
         units[i] = nil
     end
 end
 
 function M.clear()
     for i = #units, 1, -1 do
-        local u = units[i]
+        local unit = units[i]
 
-        if u then
-            task.Clear(u)
-
-            if u.delete then
-                u:delete()
-            end
+        if unit and unit.__alive == true then
+            M.delete(unit)
         end
 
         units[i] = nil
     end
 
-    unit_driver.clear()
+    unit_native.clear()
 end
 
 function M.count()

@@ -1,4 +1,5 @@
 package.cpath = package.cpath or ""
+
 package.path = table.concat({
     "?.lua",
     "?/init.lua",
@@ -6,7 +7,7 @@ package.path = table.concat({
     "packages/thlib/?/init.lua",
 }, ";")
 
-local Config = require("driver.config")
+local Config = require("config")
 
 local cfg = Config.Load("config.json")
 Config.ApplyEngine(cfg)

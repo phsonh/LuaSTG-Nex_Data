@@ -25,8 +25,8 @@ local function traceback(co, err)
 end
 
 function M.New(target, f)
-    assert(target ~= nil, "task.New(target, f): target is nil")
-    assert(type(f) == "function", "task.New(target, f): f must be function")
+    assert(target ~= nil, "Task.New(target, f): target is nil")
+    assert(type(f) == "function", "Task.New(target, f): f must be function")
 
     if target.task == nil then
         target.task = {}
@@ -68,8 +68,6 @@ function M.Do(target)
             end
         end
 
-        -- 如果 task.Clear 在当前 coroutine 内改掉了 target.task，
-        -- 就不要再写回旧 list，避免覆盖 Clear 的结果。
         if target.task ~= list then
             return
         end
@@ -131,7 +129,9 @@ function M.Wait(t)
     end
 end
 
-
+function M.W(t)
+    return M.Wait(t)
+end
 
 function M.Until(t)
     t = to_integer(t, 0)

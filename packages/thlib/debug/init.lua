@@ -1,23 +1,12 @@
 local M = {}
 
-function M.Log(level, ...)
-    if type(level) == "number" then
-        return lstg.Log(level, ...)
-    end
+M.Console = require("debug.console")
+M.HUD = require("debug.hud")
 
-    return lstg.Log(2, level, ...)
-end
-
-function M.Info(...)
-    return lstg.Log(2, ...)
-end
-
-function M.Warn(...)
-    return lstg.Log(1, ...)
-end
-
-function M.Error(...)
-    return lstg.Log(0, ...)
-end
+M.Print = M.Console.Print
+M.Log = M.Console.Log
+M.Info = M.Console.Info
+M.Warn = M.Console.Warn
+M.Error = M.Console.Error
 
 return M

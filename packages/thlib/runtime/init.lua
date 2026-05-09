@@ -1,13 +1,13 @@
-local Lapi = require("Lapi")
+local API = require("api")
 local loop = require("runtime.loop")
-local Console = require("console.init")
+local Debug = require("debug.init")
 
 local M = {}
 
 function M.init()
-    Lapi.install()
+    API.install()
 
-    Console.Print("[thlib.runtime] init")
+    Debug.Print("[thlib.runtime] init")
 
     lstg.DoFile("root.lua")
 end
@@ -24,10 +24,10 @@ function M.shutdown()
     local unit_manager = require("manager.unit_manager")
     local visual_manager = require("manager.visual_manager")
 
-    Console.Print("[thlib.runtime] shutdown")
+    Debug.Print("[thlib.runtime] shutdown")
 
-    visual_manager.clear()
     unit_manager.clear()
+    visual_manager.clear()
 end
 
 function M.event(event, ...)
