@@ -4,6 +4,10 @@ local Unit = require("class.unit")
 local Visual = require("class.visual")
 local Ani = require("class.ani")
 
+local StateMachine = require("system.state_machine")
+local Scene = require("runtime.scene")
+local SceneManager = require("runtime.scene_manager")
+
 local Resource = require("resource")
 local Render = require("render")
 local View = require("view")
@@ -32,6 +36,10 @@ function M.install()
     export("Unit", Unit)
     export("Visual", Visual)
     export("Ani", Ani)
+
+    export("StateMachine", StateMachine)
+    export("Scene", Scene)
+    export("SceneManager", SceneManager)
 
     export("Resource", Resource)
     export("Render", Render)

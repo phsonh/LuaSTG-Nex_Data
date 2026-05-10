@@ -8,7 +8,7 @@ local M = {}
 local visuals = {}
 local next_visual_order = 0
 
--- render_all() 复用这些数组，避免每帧为每个 visual 创建临时 table。
+-- render_all() 复用缓存数组，降低每帧 GC 压力。
 local render_indices = {}
 local render_anis = {}
 local render_layers = {}
@@ -24,7 +24,6 @@ local function render_less(a, b)
 
     return (render_orders[a] or 0) < (render_orders[b] or 0)
 end
-
 
 local function is_visual_class(class)
     local cur = class
@@ -54,6 +53,33 @@ local function is_ani_class(class)
     return false
 end
 
+local function lookup_class_member(class, key)
+    local cur = class
+
+    while cur do
+        local value = rawget(cur, key)
+
+        if value ~= nil then
+            return value
+        end
+
+        cur = rawget(cur, "__base")
+    end
+
+    return nil
+end
+
+local function install_ani_flags(class)
+    if rawget(class, "__ani_flags_installed") then
+        return
+    end
+
+    local frame = lookup_class_member(class, "frame")
+
+    class.__has_frame = frame ~= nil and frame ~= Ani.frame
+    class.__ani_flags_installed = true
+end
+
 local function is_valid_master(master)
     if master == nil then
         return true
@@ -70,6 +96,7 @@ function M.spawn(class, master, ...)
 
     local self = setmetatable({
         __alive = true,
+        __class = class,
 
         master = master,
         auto_delete_with_master = master ~= nil,
@@ -100,6 +127,8 @@ function M.delete(visual)
 
     visual.__alive = false
 
+    Task.Clear(visual)
+
     if visual.del then
         visual:del()
     end
@@ -113,10 +142,15 @@ function M.spawn_ani(class, master, visual, ...)
     assert(type(class) == "table", "spawn_ani(class, master, visual, ...): class must be a class table")
     assert(is_ani_class(class), "spawn_ani(class, master, visual, ...): class must inherit from Ani")
 
+    install_ani_flags(class)
+
     local self = setmetatable({
         __alive = true,
+        __class = class,
+
         master = master,
         visual = visual,
+
         timer = 0,
     }, class)
 
@@ -168,8 +202,8 @@ function M.update_all()
         end
     end
 
-    -- 和 UnitManager 一样，这里压缩当前 #visuals。
-    -- 这样 visual update 过程中新增 visual 时，不会因为旧 visual 删除导致洞数组。
+    -- 压缩当前 #visuals，而不是只压缩 frame_count。
+    -- 这样 Visual 更新中新增 Visual 时，不会因为旧 Visual 删除制造洞数组。
     local total_count = #visuals
     local write_index = 1
 
@@ -224,7 +258,7 @@ function M.render_all()
         end
     end
 
-    -- 释放 ani 引用，避免已经删除的 ani 被 render cache 延长生命周期。
+    -- 清掉强引用，避免已经删除的 Ani 被缓存数组延长生命周期。
     for i = 1, render_count do
         render_anis[i] = nil
         render_layers[i] = nil
@@ -241,6 +275,13 @@ function M.clear()
         end
 
         visuals[i] = nil
+    end
+
+    for i = 1, #render_indices do
+        render_indices[i] = nil
+        render_anis[i] = nil
+        render_layers[i] = nil
+        render_orders[i] = nil
     end
 
     next_visual_order = 0

@@ -17,9 +17,11 @@ function GameExit()
 end
 
 function FocusLoseFunc()
+    runtime.focus_lost()
 end
 
 function FocusGainFunc()
+    runtime.focus_gain()
 end
 
 function EventFunc(event, ...)

@@ -3,6 +3,15 @@ local M = {}
 M.stack = {}
 M.co = {}
 
+local coroutine_create = coroutine.create
+local coroutine_resume = coroutine.resume
+local coroutine_status = coroutine.status
+local coroutine_yield = coroutine.yield
+
+local math_floor = math.floor
+local math_ceil = math.ceil
+local debug_traceback = debug.traceback
+
 local function to_integer(value, default)
     value = tonumber(value)
 
@@ -11,16 +20,16 @@ local function to_integer(value, default)
     end
 
     if value >= 0 then
-        return math.floor(value)
+        return math_floor(value)
     else
-        return math.ceil(value)
+        return math_ceil(value)
     end
 end
 
 local function traceback(co, err)
     return tostring(err)
         .. "\n========== coroutine traceback ==========\n"
-        .. debug.traceback(co)
+        .. debug_traceback(co)
         .. "\n========== C traceback =========="
 end
 
@@ -28,12 +37,15 @@ function M.New(target, f)
     assert(target ~= nil, "Task.New(target, f): target is nil")
     assert(type(f) == "function", "Task.New(target, f): f must be function")
 
-    if target.task == nil then
-        target.task = {}
+    local list = target.task
+
+    if list == nil then
+        list = {}
+        target.task = list
     end
 
-    local co = coroutine.create(f)
-    table.insert(target.task, co)
+    local co = coroutine_create(f)
+    list[#list + 1] = co
 
     return co
 end
@@ -50,15 +62,17 @@ function M.Do(target)
     end
 
     local write_index = 1
+    local read_count = #list
 
-    for read_index = 1, #list do
+    for read_index = 1, read_count do
         local co = list[read_index]
+        local keep = false
 
-        if co and coroutine.status(co) ~= "dead" then
+        if co and coroutine_status(co) ~= "dead" then
             M.stack[#M.stack + 1] = target
             M.co[#M.co + 1] = co
 
-            local ok, err = coroutine.resume(co)
+            local ok, err = coroutine_resume(co)
 
             M.stack[#M.stack] = nil
             M.co[#M.co] = nil
@@ -66,23 +80,25 @@ function M.Do(target)
             if not ok then
                 error(traceback(co, err), 2)
             end
+
+            if target.task ~= list then
+                return
+            end
+
+            keep = coroutine_status(co) ~= "dead"
         end
 
-        if target.task ~= list then
-            return
-        end
-
-        if co and coroutine.status(co) ~= "dead" then
+        if keep then
             list[write_index] = co
             write_index = write_index + 1
         end
     end
 
-    for i = write_index, #list do
+    for i = write_index, read_count do
         list[i] = nil
     end
 
-    if #list == 0 then
+    if write_index == 1 then
         target.task = nil
     end
 end
@@ -125,7 +141,7 @@ function M.Wait(t)
     end
 
     for _ = 1, t do
-        coroutine.yield()
+        coroutine_yield()
     end
 end
 
@@ -147,7 +163,7 @@ function M.Until(t)
             return
         end
 
-        coroutine.yield()
+        coroutine_yield()
     end
 end
 

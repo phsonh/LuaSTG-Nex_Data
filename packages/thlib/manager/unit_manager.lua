@@ -48,6 +48,7 @@ local function lookup_class_member(class, key)
 
     while cur do
         local value = rawget(cur, key)
+
         if value ~= nil then
             return value
         end
@@ -69,15 +70,16 @@ local function install_unit_proxy(class)
     class.__has_frame = frame ~= nil and frame ~= Unit.frame
     class.__has_after_frame = after_frame ~= nil and after_frame ~= Unit.after_frame
 
-
     class.__index = function(obj, key)
         local value = lookup_class_member(class, key)
+
         if value ~= nil then
             return value
         end
 
         if native_fields[key] then
             local native = rawget(obj, "native")
+
             if native then
                 return native[key]
             end
@@ -93,6 +95,7 @@ local function install_unit_proxy(class)
             end
 
             local native = rawget(obj, "native")
+
             if native then
                 native[key] = value
                 return
@@ -145,16 +148,21 @@ function M.delete(unit)
         unit:del()
     end
 
-    if unit.native and unit.native:isValid() then
-        unit.native:delete()
+    local native = rawget(unit, "native")
+
+    if native and native.alive == true then
+        native:delete()
     end
 end
 
 function M.is_valid(unit)
-    return unit ~= nil
-        and unit.__alive == true
-        and unit.native ~= nil
-        and unit.native:isValid()
+    if unit == nil or unit.__alive ~= true then
+        return false
+    end
+
+    local native = rawget(unit, "native")
+
+    return native ~= nil and native.alive == true
 end
 
 local function is_alive_fast(unit)
@@ -162,9 +170,11 @@ local function is_alive_fast(unit)
 end
 
 function M.update_all()
-    -- 帧语义：
-    -- begin_frame() 之后创建的 native Unit，本帧不会执行 native movement。
-    unit_native.begin_frame()
+    -- 依赖上一轮 C++ / native.unit.lua 中加入的 begin_frame。
+
+    if unit_native.begin_frame then
+        unit_native.begin_frame()
+    end
 
     local frame_count = #units
 
@@ -198,9 +208,6 @@ function M.update_all()
         end
     end
 
-    -- 注意：这里必须压缩到当前 #units，而不是只压缩 frame_count。
-    -- 因为 frame/task 里可能创建了新 Unit。
-    -- 如果只清理 1..frame_count，旧 Unit 死亡 + 新 Unit 追加时可能制造洞数组。
     local total_count = #units
     local write_index = 1
 

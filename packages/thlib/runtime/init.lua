@@ -1,11 +1,13 @@
 local API = require("api")
 local loop = require("runtime.loop")
+local SceneManager = require("runtime.scene_manager")
 local Debug = require("debug.init")
 
 local M = {}
 
 function M.init()
     API.install()
+    SceneManager.init()
 
     Debug.Print("[thlib.runtime] init")
 
@@ -26,11 +28,26 @@ function M.shutdown()
 
     Debug.Print("[thlib.runtime] shutdown")
 
+    SceneManager.shutdown()
+
     unit_manager.clear()
     visual_manager.clear()
 end
 
+function M.focus_lost()
+    SceneManager.on_focus_lost()
+end
+
+function M.focus_gain()
+    SceneManager.on_focus_gain()
+end
+
 function M.event(event, ...)
+    local scene = SceneManager.current()
+
+    if scene and scene.event then
+        return scene:event(event, ...)
+    end
 end
 
 return M

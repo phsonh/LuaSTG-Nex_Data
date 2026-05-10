@@ -1,4 +1,6 @@
 local Layer = require("constants.layer")
+local StateMachine = require("system.state_machine")
+local Task = require("system.task")
 
 local unpack = table.unpack or unpack
 
@@ -7,6 +9,56 @@ Visual.__index = Visual
 Visual.__is_visual_base = true
 
 Visual.Layer = Layer
+
+local visual_manager_cache = nil
+
+local function get_visual_manager()
+    if visual_manager_cache == nil then
+        visual_manager_cache = require("manager.visual_manager")
+    end
+
+    return visual_manager_cache
+end
+
+local function install_state_machine(self)
+    local fsm = StateMachine.New(self)
+
+    fsm:add("empty", {
+        enter = function(owner)
+            owner.state = "empty"
+        end,
+
+        update = function(owner)
+            if owner:_consumePlayRequest() then
+                owner:_updateCurrentAni()
+            end
+        end,
+    })
+
+    fsm:add("playing", {
+        enter = function(owner)
+            owner.state = "playing"
+        end,
+
+        update = function(owner)
+            owner:_consumePlayRequest()
+            owner:_updateCurrentAni()
+        end,
+
+        render = function(owner)
+            owner:_renderCurrentAni()
+        end,
+    })
+
+    fsm:add("dead", {
+        enter = function(owner)
+            owner.state = "dead"
+        end,
+    })
+
+    self.fsm = fsm
+    fsm:force("empty")
+end
 
 function Visual:init(master)
     self.master = master
@@ -18,10 +70,12 @@ function Visual:init(master)
 
     self.next_name = nil
 
-    self.state = "empty"
-
     self.visible = true
     self.layer = 0
+
+    self.state = "empty"
+
+    install_state_machine(self)
 end
 
 function Visual:addAni(name, ani_class, ...)
@@ -40,16 +94,38 @@ function Visual:getAni()
     return self.current_ani
 end
 
+function Visual:getState()
+    if self.fsm then
+        return self.fsm:getName()
+    end
+
+    return self.state
+end
+
+function Visual:getStateMachine()
+    return self.fsm
+end
+
 function Visual:play(name)
     assert(self.ani_defs[name] ~= nil, "Visual:play(name): unknown ani '" .. tostring(name) .. "'")
 
-    -- 不在这里立刻切换。
-    -- 只把切换请求交给 Visual 状态机。
+    -- play() 不立刻销毁 / 创建 ani。
+    -- 只登记切换请求，在 Visual:_update() 的状态机边界统一处理。
     self.next_name = name
 
     if self.state ~= "dead" then
         self.state = "switching"
     end
+
+    return self
+end
+
+function Visual:switch(name)
+    -- 立即切换版本。调试、过场、UI 有时会需要。
+    assert(self.ani_defs[name] ~= nil, "Visual:switch(name): unknown ani '" .. tostring(name) .. "'")
+
+    self.next_name = name
+    self:_consumePlayRequest()
 
     return self
 end
@@ -63,8 +139,7 @@ function Visual:_destroyCurrentAni()
         return
     end
 
-    local visual_manager = require("manager.visual_manager")
-    visual_manager.delete_ani(ani)
+    get_visual_manager().delete_ani(ani)
 
     self.current_name = nil
     self.current_ani = nil
@@ -74,9 +149,7 @@ function Visual:_createAni(name)
     local def = self.ani_defs[name]
     assert(def ~= nil, "Visual:_createAni(name): unknown ani '" .. tostring(name) .. "'")
 
-    local visual_manager = require("manager.visual_manager")
-
-    local ani = visual_manager.spawn_ani(
+    local ani = get_visual_manager().spawn_ani(
         def.class,
         self.master,
         self,
@@ -89,74 +162,56 @@ function Visual:_createAni(name)
     return ani
 end
 
-function Visual:_applyState()
-    if self.state ~= "switching" then
-        return
-    end
-
+function Visual:_consumePlayRequest()
     local name = self.next_name
-    self.next_name = nil
 
     if name == nil then
-        if self.current_ani then
-            self.state = "playing"
-        else
-            self.state = "empty"
-        end
-        return
+        return false
     end
+
+    self.next_name = nil
 
     self:_destroyCurrentAni()
     self:_createAni(name)
 
     self.state = "playing"
+
+    if self.fsm then
+        self.fsm:force("playing")
+    end
+
+    return true
 end
 
-function Visual:isValid()
-    return Visual.IsValid(self)
-end
-
-function Visual:delete()
-    Visual.Del(self)
-end
-
-function Visual:del()
-    self.state = "dead"
-    self.next_name = nil
-
-    self:_destroyCurrentAni()
-
-    self.ani_defs = {}
-end
-
-function Visual:_update()
-    -- 状态机在 update 开头统一处理切换。
-    -- 这样 play() 不会立刻改变渲染对象；
-    -- 新 Ani 创建后，本帧会正常执行 frame/task；
-    -- render 时不会出现未初始化的 x/y/rot。
-    self:_applyState()
-
+function Visual:_updateCurrentAni()
     if self.state ~= "playing" then
         return
     end
 
     local ani = self.current_ani
 
-    if ani and ani.__alive == true then
-        ani.timer = (ani.timer or 0) + 1
+    if ani == nil or ani.__alive ~= true then
+        return
+    end
 
+    ani.timer = (ani.timer or 0) + 1
+
+    local class = rawget(ani, "__class")
+
+    if class == nil then
         if ani.frame then
             ani:frame()
         end
+    elseif class.__has_frame then
+        ani:frame()
+    end
 
-        if rawget(ani, "task") ~= nil then
-            local Task = require("system.task")
-            Task.Do(ani)
-        end
+    if rawget(ani, "task") ~= nil then
+        Task.Do(ani)
     end
 end
 
-function Visual:_render()
+function Visual:_renderCurrentAni()
     if self.visible == false then
         return
     end
@@ -172,6 +227,47 @@ function Visual:_render()
             ani:render()
         end
     end
+end
+
+function Visual:isValid()
+    return Visual.IsValid(self)
+end
+
+function Visual:delete()
+    Visual.Del(self)
+end
+
+function Visual:del()
+    self.next_name = nil
+
+    if self.fsm then
+        self.fsm:force("dead")
+    else
+        self.state = "dead"
+    end
+
+    self:_destroyCurrentAni()
+
+    self.ani_defs = {}
+end
+
+function Visual:_update()
+    if self.fsm then
+        self.fsm:update()
+        return
+    end
+
+    self:_consumePlayRequest()
+    self:_updateCurrentAni()
+end
+
+function Visual:_render()
+    if self.fsm then
+        self.fsm:render()
+        return
+    end
+
+    self:_renderCurrentAni()
 end
 
 function Visual.New(class, master, ...)
