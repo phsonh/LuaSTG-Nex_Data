@@ -8,6 +8,24 @@ local M = {}
 local visuals = {}
 local next_visual_order = 0
 
+-- render_all() 复用这些数组，避免每帧为每个 visual 创建临时 table。
+local render_indices = {}
+local render_anis = {}
+local render_layers = {}
+local render_orders = {}
+
+local function render_less(a, b)
+    local layer_a = render_layers[a] or 0
+    local layer_b = render_layers[b] or 0
+
+    if layer_a ~= layer_b then
+        return layer_a < layer_b
+    end
+
+    return (render_orders[a] or 0) < (render_orders[b] or 0)
+end
+
+
 local function is_visual_class(class)
     local cur = class
 
@@ -132,9 +150,9 @@ function M.is_ani_valid(ani)
 end
 
 function M.update_all()
-    local write_index = 1
+    local frame_count = #visuals
 
-    for read_index = 1, #visuals do
+    for read_index = 1, frame_count do
         local visual = visuals[read_index]
 
         if M.is_valid(visual) then
@@ -147,19 +165,30 @@ function M.update_all()
             if visual._update then
                 visual:_update()
             end
+        end
+    end
 
+    -- 和 UnitManager 一样，这里压缩当前 #visuals。
+    -- 这样 visual update 过程中新增 visual 时，不会因为旧 visual 删除导致洞数组。
+    local total_count = #visuals
+    local write_index = 1
+
+    for read_index = 1, total_count do
+        local visual = visuals[read_index]
+
+        if M.is_valid(visual) then
             visuals[write_index] = visual
             write_index = write_index + 1
         end
     end
 
-    for i = write_index, #visuals do
+    for i = write_index, total_count do
         visuals[i] = nil
     end
 end
 
 function M.render_all()
-    local render_list = {}
+    local render_count = 0
 
     for i = 1, #visuals do
         local visual = visuals[i]
@@ -168,30 +197,38 @@ function M.render_all()
             local ani = visual.current_ani
 
             if ani and ani.__alive == true and ani.visible ~= false then
-                render_list[#render_list + 1] = {
-                    visual = visual,
-                    ani = ani,
-                    layer = ani.layer ~= nil and ani.layer or visual.layer or 0,
-                    order = visual.order or 0,
-                }
+                render_count = render_count + 1
+
+                render_indices[render_count] = render_count
+                render_anis[render_count] = ani
+                render_layers[render_count] = ani.layer ~= nil and ani.layer or visual.layer or 0
+                render_orders[render_count] = visual.order or 0
             end
         end
     end
 
-    table.sort(render_list, function(a, b)
-        if a.layer ~= b.layer then
-            return a.layer < b.layer
-        end
+    for i = render_count + 1, #render_indices do
+        render_indices[i] = nil
+    end
 
-        return a.order < b.order
-    end)
+    if render_count > 1 then
+        table.sort(render_indices, render_less)
+    end
 
-    for i = 1, #render_list do
-        local ani = render_list[i].ani
+    for i = 1, render_count do
+        local slot = render_indices[i]
+        local ani = render_anis[slot]
 
-        if ani.render then
+        if ani and ani.__alive == true and ani.visible ~= false and ani.render then
             ani:render()
         end
+    end
+
+    -- 释放 ani 引用，避免已经删除的 ani 被 render cache 延长生命周期。
+    for i = 1, render_count do
+        render_anis[i] = nil
+        render_layers[i] = nil
+        render_orders[i] = nil
     end
 end
 

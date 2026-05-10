@@ -63,11 +63,12 @@ local function install_unit_proxy(class)
         return
     end
 
-    local has_frame = rawget(class, "frame") ~= nil and rawget(class, "frame") ~= Unit.frame
-    local has_after_frame = rawget(class, "after_frame") ~= nil and rawget(class, "after_frame") ~= Unit.after_frame
+    local frame = lookup_class_member(class, "frame")
+    local after_frame = lookup_class_member(class, "after_frame")
 
-    class.__has_frame = has_frame
-    class.__has_after_frame = has_after_frame
+    class.__has_frame = frame ~= nil and frame ~= Unit.frame
+    class.__has_after_frame = after_frame ~= nil and after_frame ~= Unit.after_frame
+
 
     class.__index = function(obj, key)
         local value = lookup_class_member(class, key)
@@ -161,9 +162,13 @@ local function is_alive_fast(unit)
 end
 
 function M.update_all()
-    local count = #units
+    -- 帧语义：
+    -- begin_frame() 之后创建的 native Unit，本帧不会执行 native movement。
+    unit_native.begin_frame()
 
-    for i = 1, count do
+    local frame_count = #units
+
+    for i = 1, frame_count do
         local unit = units[i]
 
         if is_alive_fast(unit) then
@@ -181,7 +186,7 @@ function M.update_all()
 
     unit_native.update_all()
 
-    for i = 1, count do
+    for i = 1, frame_count do
         local unit = units[i]
 
         if is_alive_fast(unit) then
@@ -193,9 +198,13 @@ function M.update_all()
         end
     end
 
+    -- 注意：这里必须压缩到当前 #units，而不是只压缩 frame_count。
+    -- 因为 frame/task 里可能创建了新 Unit。
+    -- 如果只清理 1..frame_count，旧 Unit 死亡 + 新 Unit 追加时可能制造洞数组。
+    local total_count = #units
     local write_index = 1
 
-    for read_index = 1, count do
+    for read_index = 1, total_count do
         local unit = units[read_index]
 
         if is_alive_fast(unit) then
@@ -204,7 +213,7 @@ function M.update_all()
         end
     end
 
-    for i = write_index, count do
+    for i = write_index, total_count do
         units[i] = nil
     end
 end

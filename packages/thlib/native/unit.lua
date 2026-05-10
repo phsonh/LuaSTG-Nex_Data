@@ -5,6 +5,11 @@ function M.new()
     return lstg.Unit.new()
 end
 
+function M.begin_frame()
+    assert(lstg.Unit and lstg.Unit.beginFrame, "lstg.Unit.beginFrame is not registered")
+    return lstg.Unit.beginFrame()
+end
+
 function M.update_all()
     assert(lstg.Unit and lstg.Unit.updateAll, "lstg.Unit.updateAll is not registered")
     return lstg.Unit.updateAll()

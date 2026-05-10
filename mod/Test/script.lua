@@ -196,8 +196,8 @@ function boss_unit:init()
                 local theta = (i - 1) * (360 / count)
                 local a = ang + theta
 
-                local offset_x = 10 * cosd(a)
-                local offset_y = 10 * sind(a)
+                local offset_x = 6 * cosd(a)
+                local offset_y = 6 * sind(a)
 
                 bullet(
                     self.x + offset_x,
