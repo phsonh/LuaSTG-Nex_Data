@@ -26,6 +26,12 @@ local function to_integer(value, default)
     end
 end
 
+local function set_has_task(target, value)
+    if target ~= nil then
+        rawset(target, "__has_task", value and true or false)
+    end
+end
+
 local function traceback(co, err)
     return tostring(err)
         .. "\n========== coroutine traceback ==========\n"
@@ -37,15 +43,18 @@ function M.New(target, f)
     assert(target ~= nil, "Task.New(target, f): target is nil")
     assert(type(f) == "function", "Task.New(target, f): f must be function")
 
-    local list = target.task
+    local list = rawget(target, "task")
 
     if list == nil then
         list = {}
-        target.task = list
+        rawset(target, "task", list)
     end
 
     local co = coroutine_create(f)
+
     list[#list + 1] = co
+
+    set_has_task(target, true)
 
     return co
 end
@@ -55,9 +64,10 @@ function M.Do(target)
         return
     end
 
-    local list = target.task
+    local list = rawget(target, "task")
 
     if list == nil then
+        set_has_task(target, false)
         return
     end
 
@@ -81,7 +91,9 @@ function M.Do(target)
                 error(traceback(co, err), 2)
             end
 
-            if target.task ~= list then
+            if rawget(target, "task") ~= list then
+                local new_list = rawget(target, "task")
+                set_has_task(target, new_list ~= nil and #new_list > 0)
                 return
             end
 
@@ -99,12 +111,22 @@ function M.Do(target)
     end
 
     if write_index == 1 then
-        target.task = nil
+        rawset(target, "task", nil)
+        set_has_task(target, false)
+    else
+        set_has_task(target, true)
     end
 end
 
 function M.Clear(target, keep_self)
-    if target == nil or target.task == nil then
+    if target == nil then
+        return
+    end
+
+    local list = rawget(target, "task")
+
+    if list == nil then
+        set_has_task(target, false)
         return
     end
 
@@ -113,24 +135,27 @@ function M.Clear(target, keep_self)
         local keep = false
 
         if current then
-            for i = 1, #target.task do
-                if target.task[i] == current then
+            for i = 1, #list do
+                if list[i] == current then
                     keep = true
                     break
                 end
             end
         end
 
-        target.task = nil
+        rawset(target, "task", nil)
+        set_has_task(target, false)
 
         if keep then
-            target.task = { current }
+            rawset(target, "task", { current })
+            set_has_task(target, true)
         end
 
         return
     end
 
-    target.task = nil
+    rawset(target, "task", nil)
+    set_has_task(target, false)
 end
 
 function M.Wait(t)

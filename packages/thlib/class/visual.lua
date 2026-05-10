@@ -109,8 +109,6 @@ end
 function Visual:play(name)
     assert(self.ani_defs[name] ~= nil, "Visual:play(name): unknown ani '" .. tostring(name) .. "'")
 
-    -- play() 不立刻销毁 / 创建 ani。
-    -- 只登记切换请求，在 Visual:_update() 的状态机边界统一处理。
     self.next_name = name
 
     if self.state ~= "dead" then
@@ -121,7 +119,6 @@ function Visual:play(name)
 end
 
 function Visual:switch(name)
-    -- 立即切换版本。调试、过场、UI 有时会需要。
     assert(self.ani_defs[name] ~= nil, "Visual:switch(name): unknown ani '" .. tostring(name) .. "'")
 
     self.next_name = name
@@ -196,17 +193,13 @@ function Visual:_updateCurrentAni()
 
     ani.timer = (ani.timer or 0) + 1
 
-    local class = rawget(ani, "__class")
+    local frame = ani.__frame_func
 
-    if class == nil then
-        if ani.frame then
-            ani:frame()
-        end
-    elseif class.__has_frame then
-        ani:frame()
+    if frame ~= nil then
+        frame(ani)
     end
 
-    if rawget(ani, "task") ~= nil then
+    if ani.__has_task == true then
         Task.Do(ani)
     end
 end
@@ -223,8 +216,10 @@ function Visual:_renderCurrentAni()
     local ani = self.current_ani
 
     if ani and ani.__alive == true and ani.visible ~= false then
-        if ani.render then
-            ani:render()
+        local render = ani.__render_func
+
+        if render ~= nil then
+            render(ani)
         end
     end
 end

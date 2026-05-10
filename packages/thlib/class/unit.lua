@@ -2,6 +2,12 @@ local Unit = {}
 Unit.__index = Unit
 Unit.__is_unit_base = true
 
+local math_rad = math.rad
+local math_sin = math.sin
+local math_cos = math.cos
+local math_sqrt = math.sqrt
+local math_deg = math.deg
+
 local atan2 = math.atan2 or function(y, x)
     return math.atan(y, x)
 end
@@ -45,6 +51,12 @@ function Unit.IsValid(unit)
     return manager.is_valid(unit)
 end
 
+function Unit.IsAliveFast(unit)
+    return unit ~= nil and rawget(unit, "__alive") == true
+end
+
+Unit.FastIsValid = Unit.IsAliveFast
+
 function Unit.Count()
     local manager = require("manager.unit_manager")
     return manager.count()
@@ -54,10 +66,10 @@ function Unit.SetV(obj, v, angle, update_rot)
     v = v or 0
     angle = angle or 0
 
-    local r = math.rad(angle)
+    local r = math_rad(angle)
 
-    obj.vx = v * math.cos(r)
-    obj.vy = v * math.sin(r)
+    obj.vx = v * math_cos(r)
+    obj.vy = v * math_sin(r)
 
     if update_rot ~= false then
         obj.rot = angle
@@ -68,21 +80,21 @@ function Unit.SetA(obj, a, angle)
     a = a or 0
     angle = angle or 0
 
-    local r = math.rad(angle)
+    local r = math_rad(angle)
 
-    obj.ax = a * math.cos(r)
-    obj.ay = a * math.sin(r)
+    obj.ax = a * math_cos(r)
+    obj.ay = a * math_sin(r)
 end
 
 function Unit.Dist(a, b)
     local dx = (a.x or 0) - (b.x or 0)
     local dy = (a.y or 0) - (b.y or 0)
 
-    return math.sqrt(dx * dx + dy * dy)
+    return math_sqrt(dx * dx + dy * dy)
 end
 
 function Unit.Angle(a, b)
-    return math.deg(atan2((b.y or 0) - (a.y or 0), (b.x or 0) - (a.x or 0)))
+    return math_deg(atan2((b.y or 0) - (a.y or 0), (b.x or 0) - (a.x or 0)))
 end
 
 return Unit

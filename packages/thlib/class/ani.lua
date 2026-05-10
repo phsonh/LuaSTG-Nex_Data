@@ -1,9 +1,24 @@
-local Render = require("render")
+local Renderer = require("native.renderer")
 local Task = require("system.task")
 
 local Ani = {}
 Ani.__index = Ani
 Ani.__is_ani_base = true
+
+local sprite_func = nil
+
+local function get_sprite()
+    local f = sprite_func
+
+    if f ~= nil then
+        return f
+    end
+
+    f = Renderer.GetSprite()
+    sprite_func = f
+
+    return f
+end
 
 function Ani:init(master, visual)
     self.master = master
@@ -36,18 +51,30 @@ end
 function Ani:frame()
 end
 
-function Ani:render()
+function Ani.RenderDefault(self)
     if self.visible == false then
         return
     end
 
-    Render.Sprite(
+    local sx = self.scale_x
+
+    if sx == nil then
+        sx = 1
+    end
+
+    local sy = self.scale_y
+
+    if sy == nil then
+        sy = sx
+    end
+
+    return get_sprite()(
         self.img or "img_void",
         self.x or 0,
         self.y or 0,
         self.rot or 0,
-        self.scale_x or 1,
-        self.scale_y or self.scale_x or 1,
+        sx,
+        sy,
         self.blend or "",
         self.a or 255,
         self.r or 255,
@@ -56,6 +83,8 @@ function Ani:render()
         self.z or 0.5
     )
 end
+
+Ani.render = Ani.RenderDefault
 
 function Ani:isValid()
     return self.__alive == true
@@ -67,6 +96,7 @@ function Ani:delete()
     end
 
     self.__alive = false
+
     Task.Clear(self)
 
     if self.del then

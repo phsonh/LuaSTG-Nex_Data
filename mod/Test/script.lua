@@ -109,7 +109,7 @@ function bullet_unit:init(x, y, angle, speed)
 
     Unit.SetV(self, speed or 3, angle or 0)
 
-    self.visual = Visual.New(bullet_visual, self)
+    --self.visual = Visual.New(bullet_visual, self)
 end
 
 function bullet_unit:frame()
@@ -190,7 +190,7 @@ function boss_unit:init()
             local fx = ((-2 / 9) / 2) * x + 14 / 3
             ang = ang + fx
 
-            local count = 8
+            local count = 514
 
             for i = 1, count do
                 local theta = (i - 1) * (360 / count)

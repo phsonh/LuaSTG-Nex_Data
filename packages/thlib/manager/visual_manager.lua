@@ -8,22 +8,11 @@ local M = {}
 local visuals = {}
 local next_visual_order = 0
 
--- render_all() 复用缓存数组，降低每帧 GC 压力。
-local render_indices = {}
-local render_anis = {}
-local render_layers = {}
-local render_orders = {}
-
-local function render_less(a, b)
-    local layer_a = render_layers[a] or 0
-    local layer_b = render_layers[b] or 0
-
-    if layer_a ~= layer_b then
-        return layer_a < layer_b
-    end
-
-    return (render_orders[a] or 0) < (render_orders[b] or 0)
-end
+-- layer bucket 渲染缓存。
+local layer_buckets = {}
+local layer_keys = {}
+local layer_seen = {}
+local layer_key_count = 0
 
 local function is_visual_class(class)
     local cur = class
@@ -76,7 +65,20 @@ local function install_ani_flags(class)
 
     local frame = lookup_class_member(class, "frame")
 
-    class.__has_frame = frame ~= nil and frame ~= Ani.frame
+    if frame == Ani.frame then
+        frame = nil
+    end
+
+    local render = lookup_class_member(class, "render")
+
+    if render == nil then
+        render = Ani.render
+    end
+
+    class.__ani_frame_func = frame
+    class.__ani_render_func = render
+
+    class.__has_frame = frame ~= nil
     class.__ani_flags_installed = true
 end
 
@@ -85,7 +87,52 @@ local function is_valid_master(master)
         return true
     end
 
-    return Unit.IsValid(master)
+    -- 性能优先：这里只检查 Lua 层生命标记，不跨 C++ 查 native.alive。
+    -- UnitManager 删除 Unit 时会同步设置 __alive=false。
+    return Unit.IsAliveFast(master)
+end
+
+local function clear_render_buckets()
+    for i = 1, layer_key_count do
+        local layer = layer_keys[i]
+        local bucket = layer_buckets[layer]
+
+        if bucket then
+            for j = 1, bucket.n do
+                bucket[j] = nil
+            end
+
+            bucket.n = 0
+        end
+
+        layer_seen[layer] = nil
+        layer_keys[i] = nil
+    end
+
+    layer_key_count = 0
+end
+
+local function push_render_ani(layer, ani)
+    local bucket = layer_buckets[layer]
+
+    if bucket == nil then
+        bucket = {
+            n = 0,
+        }
+
+        layer_buckets[layer] = bucket
+    end
+
+    if layer_seen[layer] ~= true then
+        layer_key_count = layer_key_count + 1
+        layer_keys[layer_key_count] = layer
+        layer_seen[layer] = true
+    end
+
+    local n = bucket.n + 1
+
+    bucket.n = n
+    bucket[n] = ani
 end
 
 function M.spawn(class, master, ...)
@@ -105,6 +152,8 @@ function M.spawn(class, master, ...)
         order = next_visual_order,
 
         visible = true,
+
+        __has_task = false,
     }, class)
 
     visuals[#visuals + 1] = self
@@ -152,6 +201,11 @@ function M.spawn_ani(class, master, visual, ...)
         visual = visual,
 
         timer = 0,
+
+        __frame_func = class.__ani_frame_func,
+        __render_func = class.__ani_render_func,
+
+        __has_task = false,
     }, class)
 
     if self.init then
@@ -202,8 +256,6 @@ function M.update_all()
         end
     end
 
-    -- 压缩当前 #visuals，而不是只压缩 frame_count。
-    -- 这样 Visual 更新中新增 Visual 时，不会因为旧 Visual 删除制造洞数组。
     local total_count = #visuals
     local write_index = 1
 
@@ -222,7 +274,7 @@ function M.update_all()
 end
 
 function M.render_all()
-    local render_count = 0
+    clear_render_buckets()
 
     for i = 1, #visuals do
         local visual = visuals[i]
@@ -231,39 +283,39 @@ function M.render_all()
             local ani = visual.current_ani
 
             if ani and ani.__alive == true and ani.visible ~= false then
-                render_count = render_count + 1
+                local layer = ani.layer
 
-                render_indices[render_count] = render_count
-                render_anis[render_count] = ani
-                render_layers[render_count] = ani.layer ~= nil and ani.layer or visual.layer or 0
-                render_orders[render_count] = visual.order or 0
+                if layer == nil then
+                    layer = visual.layer or 0
+                end
+
+                push_render_ani(layer, ani)
             end
         end
     end
 
-    for i = render_count + 1, #render_indices do
-        render_indices[i] = nil
+    if layer_key_count > 1 then
+        table.sort(layer_keys)
     end
 
-    if render_count > 1 then
-        table.sort(render_indices, render_less)
-    end
+    for i = 1, layer_key_count do
+        local layer = layer_keys[i]
+        local bucket = layer_buckets[layer]
 
-    for i = 1, render_count do
-        local slot = render_indices[i]
-        local ani = render_anis[slot]
+        for j = 1, bucket.n do
+            local ani = bucket[j]
 
-        if ani and ani.__alive == true and ani.visible ~= false and ani.render then
-            ani:render()
+            if ani and ani.__alive == true and ani.visible ~= false then
+                local render = ani.__render_func
+
+                if render ~= nil then
+                    render(ani)
+                end
+            end
         end
     end
 
-    -- 清掉强引用，避免已经删除的 Ani 被缓存数组延长生命周期。
-    for i = 1, render_count do
-        render_anis[i] = nil
-        render_layers[i] = nil
-        render_orders[i] = nil
-    end
+    clear_render_buckets()
 end
 
 function M.clear()
@@ -277,12 +329,7 @@ function M.clear()
         visuals[i] = nil
     end
 
-    for i = 1, #render_indices do
-        render_indices[i] = nil
-        render_anis[i] = nil
-        render_layers[i] = nil
-        render_orders[i] = nil
-    end
+    clear_render_buckets()
 
     next_visual_order = 0
 end

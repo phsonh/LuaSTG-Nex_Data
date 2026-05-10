@@ -67,8 +67,19 @@ local function install_unit_proxy(class)
     local frame = lookup_class_member(class, "frame")
     local after_frame = lookup_class_member(class, "after_frame")
 
-    class.__has_frame = frame ~= nil and frame ~= Unit.frame
-    class.__has_after_frame = after_frame ~= nil and after_frame ~= Unit.after_frame
+    if frame == Unit.frame then
+        frame = nil
+    end
+
+    if after_frame == Unit.after_frame then
+        after_frame = nil
+    end
+
+    class.__unit_frame_func = frame
+    class.__unit_after_frame_func = after_frame
+
+    class.__has_frame = frame ~= nil
+    class.__has_after_frame = after_frame ~= nil
 
     class.__index = function(obj, key)
         local value = lookup_class_member(class, key)
@@ -118,8 +129,14 @@ function M.spawn(class, ...)
 
     local self = setmetatable({
         native = native,
+
         __alive = true,
         __class = class,
+
+        __frame_func = class.__unit_frame_func,
+        __after_frame_func = class.__unit_after_frame_func,
+
+        __has_task = false,
     }, class)
 
     units[#units + 1] = self
@@ -170,8 +187,6 @@ local function is_alive_fast(unit)
 end
 
 function M.update_all()
-    -- 依赖上一轮 C++ / native.unit.lua 中加入的 begin_frame。
-
     if unit_native.begin_frame then
         unit_native.begin_frame()
     end
@@ -182,13 +197,13 @@ function M.update_all()
         local unit = units[i]
 
         if is_alive_fast(unit) then
-            local class = rawget(unit, "__class")
+            local frame = unit.__frame_func
 
-            if class and class.__has_frame then
-                unit:frame()
+            if frame ~= nil then
+                frame(unit)
             end
 
-            if rawget(unit, "task") ~= nil then
+            if unit.__has_task == true then
                 Task.Do(unit)
             end
         end
@@ -200,10 +215,10 @@ function M.update_all()
         local unit = units[i]
 
         if is_alive_fast(unit) then
-            local class = rawget(unit, "__class")
+            local after_frame = unit.__after_frame_func
 
-            if class and class.__has_after_frame then
-                unit:after_frame()
+            if after_frame ~= nil then
+                after_frame(unit)
             end
         end
     end
